@@ -9,15 +9,17 @@ function SignupPage() {
                 <label>Name:</label>
                 <input type='text'/>
             </div>
+            <br />
             <div>
                 <label>Email:</label>
                 <input type='email'/>
             </div>
+            <br />
             <div>
             <label>Password:</label>
                 <input type='password'/>
             </div>
-            <br></br>
+            <br />
             <div>
                 <button className="login-btn" type="submit">Sign up</button>
             </div>

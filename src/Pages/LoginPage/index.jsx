@@ -9,10 +9,12 @@ function LoginPage() {
                 <label>Email:</label>
                 <input type='email'/>
             </div>
+            <br />
             <div>
             <label>Password:</label>
                 <input type='password'/>
             </div>
+            <br />
             <div>
                 <button className="login-btn" type="submit">Login</button>
             </div>

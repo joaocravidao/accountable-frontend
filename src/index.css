@@ -3,7 +3,7 @@
   margin: 0 auto;
   text-align: center;
   color: black;
-  background: linear-gradient(to bottom right, grey, white);
+  
   height: 100vh;
   display: flex;
   align-items: center;
@@ -12,6 +12,7 @@
 
 body {
   margin: 0;
+  background: linear-gradient(to bottom right, grey, white);
 }
 
 #dashboard {
@@ -51,4 +52,25 @@ body {
 
 .daily-todo-task-2 {
   border-bottom: 1px solid white;
+}
+
+.user-profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  border-radius: 10px;
+  width: 60%;
+  height: 60%;
+}
+
+.user-profile-container div {
+  text-align: center;
+}
+
+.friends-container {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  border-radius: 10px;
 }

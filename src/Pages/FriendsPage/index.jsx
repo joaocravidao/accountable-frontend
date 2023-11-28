@@ -2,6 +2,8 @@ function FriendsPage(){
     return (
         <div>
             <h1>Friends Page</h1>
+<div className="friends-container">
+            
             <div>
                 <h2>Bernado</h2>
                 <div>
@@ -33,7 +35,7 @@ function FriendsPage(){
                 </div>
             </div>
             <div>
-                <h2>Marianna</h2>
+                <h2>Mariana</h2>
                 <div>
                     <h3>Task 1</h3>
                     <p>Description</p>
@@ -48,6 +50,8 @@ function FriendsPage(){
                 </div>
             </div>
         </div>
+        </div>
+        
     )
 }
 
