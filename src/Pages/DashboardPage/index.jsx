@@ -4,9 +4,10 @@ function DashboardPage() {
   return (
     <div>
         <h1>Dashboard Page</h1>
-        <div>
+        <div id='dashboard'> 
+        <div id='daily-todo'>
           <h2>Daily To-Do</h2>
-          <div>
+          <div id="daily-todo-task">
             <h3>Task #1</h3>
             <p><b>Deadline: </b> 20.12.2023</p>
             <p><b>Description: </b> 
@@ -25,7 +26,7 @@ function DashboardPage() {
             Find a badass job.</p>
           </div>
         </div>
-        <div>
+        <div id='friends-todo'>
           <h2>Friends Overview</h2>
           <div>
             <h3>Friends Task #1</h3>
@@ -46,6 +47,8 @@ function DashboardPage() {
             Learn playing guitar</p>
           </div>
         </div>
+        </div>
+
     </div>
   )
 }

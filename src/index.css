@@ -3,6 +3,40 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: black;
+  color: black;
+}
+
+body {
+  margin: 0;
+}
+
+#dashboard {
+  display: flex;
+  justify-content: space-around;
   color: white;
 }
+
+#dashboard p, h3 {
+  text-align: left;
+  margin-left: 100px;
+  padding-right: 100px;
+}
+
+#daily-todo {
+  background-color: grey;
+  border-radius: 20px;
+}
+
+#friends-todo {
+  background-color: grey;
+  border-radius: 20px;
+  padding-bottom: 100px;
+}
+
+#daily-todo-task{
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
