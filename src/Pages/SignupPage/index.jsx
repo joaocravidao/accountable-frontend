@@ -1,31 +1,60 @@
-import React from 'react'
+import axios from 'axios';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
-function SignupPage() {
-  return (
-    <div>
+const API_URL = "http://localhost:5173";
+
+function SignUpPage(){
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [error, setError] = useState("");
+
+    const navigate = useNavigate();
+
+    const handleSignUpSubmit = (e) => {
+        // Prevent default actions of the form submission e.g.: refreshing the page
+        e.preventDefault();
+
+        // Create a request body object
+        const requestBody = {email, password, name};
+
+        axios.post(`${API_URL}/auth/signup`, requestBody)
+            .then(()=>{
+                navigate('/login');
+            })
+            .catch((error)=>{
+                const errorDescription = error.response.data.message;
+                setError(errorDescription);
+            })
+    }
+
+return(
+    <div className='signup-container'>
         <h1>Sign-up Page</h1>
-        <form>
-            <div>
-                <label>Name:</label>
-                <input type='text'/>
-            </div>
-            <br />
-            <div>
+        <form onSubmit = {handleSignUpSubmit}>
+            <div> 
                 <label>Email:</label>
-                <input type='email'/>
+                <input type="email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+            </div>
+            <br />
+            <div> 
+                <label>Password:</label>
+                <input type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
+            </div>
+            <br />
+            <div> 
+                <label>Username:</label>
+                <input type="text" name="username" value={name} onChange={(e)=> setName(e.target.value)}/>
             </div>
             <br />
             <div>
-            <label>Password:</label>
-                <input type='password'/>
+                <button type="submit">Sign Up</button>
             </div>
-            <br />
-            <div>
-                <button className="login-btn" type="submit">Sign up</button>
-            </div>
+            {error && <p>{error}</p>}
         </form>
-    </div>
-  )
+    </div>)
+
 }
 
-export default SignupPage
+export default SignUpPage;

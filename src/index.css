@@ -74,3 +74,15 @@ body {
   display: flex;
   border-radius: 10px;
 }
+
+.signup-container {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 50px;
+}
+
+.login-container {
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 50px;
+}
