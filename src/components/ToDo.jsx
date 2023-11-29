@@ -14,4 +14,4 @@ const ToDo = ({text, updateMode, deleteToDo}) => {
   )
 }
 
-export default ToDo
+export default ToDo;

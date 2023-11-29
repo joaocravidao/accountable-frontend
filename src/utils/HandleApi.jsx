@@ -4,9 +4,7 @@ import { useState } from "react";
 
 const API_URL = "http://localhost:5005";
 
-const [toDo, setToDo] = useState([''])
-
-getAllToDo = (setToDo) => {
+const getAllToDo = (setToDo) => {
     axios
     .get(API_URL)
     .then(({data}) => {
