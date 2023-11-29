@@ -7,24 +7,24 @@ function DashboardPage() {
 
 	const [toDo, setToDo] = useState([])
 
-	//useEffect(() => {
-		//getAllToDo(setToDo)
-	//}, [])
+	useEffect(() => {
+	getAllToDo(setToDo)
+	}, [])
 
   return (
     <div className='container'>
-        <h1>Dashboard Page</h1>
-		<div className='top'>
-			<input type='text' placeholder='add to-dos...'/>
-				<div className='add'>Add</div>
-		</div>
-		<div className="list">
-
-			{toDo.map((item) => <ToDo key={item._id} text={item.text} />)}
-
-		</div>
+      <h1>Dashboard Page</h1>
+      <div className='top'>
+        <input type='text' placeholder='add to-dos...' />
+        <div className='add'>Add</div>
+      </div>
+      <div className='list'>
+        {toDo.map((item) => (
+          <ToDo key={item._id} text={item.text} />
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
 export default DashboardPage;
