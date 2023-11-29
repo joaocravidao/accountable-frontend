@@ -40,10 +40,9 @@ This is an app users can create their own interactive to-do lists and share them
 | ---------------------------- | -------------------- | -------------------------- | --------------------------------------------------------- |
 | `/login`                     | LoginPage            | anon only `<AnonRoute>`    | Login form, navigates to home page after login.           |
 | `/signup`                    | SignupPage           | anon only  `<AnonRoute>`   | Signup form, navigates to home page after signup.         |
-| `/mydashboard`               | MyDashboardPage      | public `<Route>`           | Home page. Includes To-Do List and friends Overview |
-| `/user-profile`              | ProfilePage          | user only `<PrivateRoute>` | User profile.                            |
-| `/friends`                   | FriendsPage          | user only `<PrivateRoute>` | Friends Page.                            |
-
+| `/`                          | DashboardPage        | public `<Route>`           | Home page. Includes To-Do List and friends Overview       |
+| `/user-profile`              | ProfilePage          | user only `<PrivateRoute>` | User profile.                                             |
+| `/friends`                   | FriendsPage          | user only `<PrivateRoute>` | Friends Page.                                             |
 
 
 

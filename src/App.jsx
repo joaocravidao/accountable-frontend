@@ -9,12 +9,12 @@ import UserProfilePage from './Pages/UserProfilePage'
 function App() {
   return (
     <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="/friends" element={<FriendsPage/>}/>
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/user-profile" element={<UserProfilePage />} />
-       </Routes>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/" element={<DashboardPage/>}/>
+      <Route path="/friends" element={<FriendsPage/>}/>
+      <Route path="/signup" element={<SignUpPage/>} />
+      <Route path="/user-profile" element={<UserProfilePage/>}/>
+    </Routes>
   )
 }
 

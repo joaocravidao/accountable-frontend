@@ -34,17 +34,17 @@ return(
         <h1>Sign-up Page</h1>
         <form onSubmit = {handleSignUpSubmit}>
             <div> 
-                <label>Email:</label>
-                <input type="email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                <label>Email: </label>
+                <input type="email" name="email" placeholder='enter email...' value={email} onChange={(e)=> setEmail(e.target.value)}/>
             </div>
             <br />
             <div> 
-                <label>Password:</label>
+                <label>Password: </label>
                 <input type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
             </div>
             <br />
             <div> 
-                <label>Username:</label>
+                <label>Username: </label>
                 <input type="text" name="username" value={name} onChange={(e)=> setName(e.target.value)}/>
             </div>
             <br />

@@ -1,57 +1,5 @@
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  color: black;
-  
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 body {
   margin: 0;
-  background: linear-gradient(to bottom right, grey, white);
-}
-
-#dashboard {
-  display: flex;
-  justify-content: space-around;
-  color: white;
-}
-
-#dashboard p, h3 {
-  text-align: left;
-  margin-left: 100px;
-  padding-right: 100px;
-}
-
-#daily-todo {
-  background-color: grey;
-  border-radius: 20px;
-  border: 2px solid rgb(255, 255, 255);
-  margin: 10px;
-  box-shadow: 5px 5px 10px black;
-}
-
-#friends-todo {
-  background-color: grey;
-  border-radius: 20px;
-  padding-bottom: 100px;
-  border: 2px solid rgb(255, 255, 255);
-  margin: 10px;
-  box-shadow: 5px 5px 10px black;
-}
-
-.daily-todo-task{
-  border-color: rgb(255, 255, 255);
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-}
-
-.daily-todo-task-2 {
-  border-bottom: 1px solid white;
 }
 
 .user-profile-container {
@@ -69,12 +17,6 @@ body {
   text-align: center;
 }
 
-.friends-container {
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  border-radius: 10px;
-}
-
 .signup-container {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
@@ -85,4 +27,60 @@ body {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   padding: 50px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.top {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+input {
+  border: none;
+  outline: none;
+  width: 400px;
+  padding: 0.5rem;
+  border-bottom: 1px solid #000;
+}
+
+.add {
+  background-color: #000;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+
+.todo {
+  position: relative;
+  margin-top: 1rem;
+  background-color: #000;
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 5px;
+}
+
+.icons {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 20px;
 }

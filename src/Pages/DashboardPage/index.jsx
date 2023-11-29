@@ -1,54 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import ToDo from '../../components/ToDo';
+import { getAllToDo } from '../../utils/HandleApi';
+
 
 function DashboardPage() {
-  return (
-    <div>
-        <h1>Dashboard Page</h1>
-        <div id='dashboard'> 
-        <div id='daily-todo'>
-          <h2>Daily To-Do</h2>
-          <div className="daily-todo-task">
-            <h3>Task #1</h3>
-            <p><b>Deadline: </b> 20.12.2023</p>
-            <p><b>Description: </b> 
-            Find a badass job.</p>
-          </div>
-          <div className='daily-todo-task-2'>
-            <h3>Task #2</h3>
-            <p><b>Deadline: </b> 20.12.2023</p>
-            <p><b>Description: </b> 
-            Find a badass job.</p>
-          </div>
-          <div className='daily-todo-task-2'>
-            <h3>Task #3</h3>
-            <p><b>Deadline: </b> 20.12.2023</p>
-            <p><b>Description: </b> 
-            Find a badass job.</p>
-          </div>
-        </div>
-        <div id='friends-todo'>
-          <h2>Friends Overview</h2>
-          <div className="daily-todo-task">
-            <h3>Friends Task #1</h3>
-            <p><b>Deadline: </b> 20.12.2023</p>
-            <p><b>Description: </b> 
-            Learn playing guitar</p>
-          </div>
-          <div className='daily-todo-task-2'>
-            <h3>Friends Task #2</h3>
-            <p><b>Deadline: </b> 20.12.2023</p>
-            <p><b>Description: </b> 
-            Learn playing guitar</p>
-          </div>
-          <div className='daily-todo-task-2'>
-            <h3>Friends Task #3</h3>
-            <p><b>Deadline: </b> 20.12.2023</p>
-            <p><b>Description: </b> 
-            Learn playing guitar</p>
-          </div>
-        </div>
-        </div>
 
+	const [toDo, setToDo] = useState([])
+
+	//useEffect(() => {
+		//getAllToDo(setToDo)
+	//}, [])
+
+  return (
+    <div className='container'>
+        <h1>Dashboard Page</h1>
+		<div className='top'>
+			<input type='text' placeholder='add to-dos...'/>
+				<div className='add'>Add</div>
+		</div>
+		<div className="list">
+
+			{toDo.map((item) => <ToDo key={item._id} text={item.text} />)}
+
+		</div>
     </div>
   )
 }

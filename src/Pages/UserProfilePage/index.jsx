@@ -43,13 +43,13 @@ const UserProfilePage = () => {
       <div>
         <h2>User Profile</h2>
         <p>
-          <strong>First Name:</strong> {user.firstName}
+          <strong>First Name: </strong> {user.firstName}
         </p>
         <p>
-          <strong>Last Name:</strong> {user.lastName}
+          <strong>Last Name: </strong> {user.lastName}
         </p>
         <p>
-          <strong>Email:</strong> {user.email}
+          <strong>Email: </strong> {user.email}
         </p>
         <button onClick={handleEditProfile}>Edit Profile</button>
       </div>

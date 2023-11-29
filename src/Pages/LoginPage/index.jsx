@@ -39,12 +39,12 @@ function LoginPage(){
         <h1>Login Page</h1>
         <form onSubmit = {handleLoginSubmit}>
             <div> 
-                <label>Email:</label>
+                <label>Email: </label>
                 <input type="email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
             </div>
             <br />
             <div> 
-                <label>Password:</label>
+                <label>Password: </label>
                 <input type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
             </div>
             <br />
