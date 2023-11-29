@@ -1,8 +1,12 @@
 import axios from "axios";
+import ToDo from "../components/ToDo";
+import { useState } from "react";
 
 const API_URL = "http://localhost:5005";
 
-const getAllToDo = (setToDo) => {
+const [toDo, setToDo] = useState([''])
+
+getAllToDo = (setToDo) => {
     axios
     .get(API_URL)
     .then(({data}) => {
