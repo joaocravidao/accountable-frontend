@@ -24,6 +24,7 @@ function LoginPage(){
         axios.post(`${API_URL}/auth/login`, requestBody)
             .then((response)=>{
                 storeToken(response.data.authToken);
+                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.authToken}`;
                 authenticateUser();
                 navigate('/');
             })
