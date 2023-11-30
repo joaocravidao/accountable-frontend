@@ -13,4 +13,4 @@ const getAllToDo = (setToDo) => {
     })
 }
 
-export {getAllToDo}
+export {getAllToDo};
