@@ -63,6 +63,8 @@ function DashboardPage() {
       .catch((error) => console.log(error));
   };
 
+
+
   return (
     <div className='container'>
       <h1>Dashboard Page</h1>
@@ -105,8 +107,13 @@ function DashboardPage() {
               className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}
               key={toDo._id}
             >
-              <div className='text'>{toDo.text}</div>
-              <BiEdit className='icon' />
+              <div className='text'>
+                <h4>{toDo.title}</h4>
+                <p>{toDo.description}</p>
+                <p>{toDo.deadline}</p>
+                {toDo.attachments}
+              </div>
+              <BiEdit className='icon' onClick={()=> navigate} />
               <AiFillDelete
                 className='icon'
                 onClick={() => handleDelete(toDo._id)}
