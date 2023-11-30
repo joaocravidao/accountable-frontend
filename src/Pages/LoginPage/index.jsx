@@ -26,7 +26,7 @@ function LoginPage(){
                 storeToken(response.data.authToken);
                 axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.authToken}`;
                 authenticateUser();
-                navigate('/');
+                navigate('/dashboard');
             })
             .catch((error)=>{
                 const errorDescription = error.response.data.message; 
