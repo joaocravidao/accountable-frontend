@@ -29,16 +29,7 @@ function DashboardPage() {
     }))
   }
 
-  useEffect(() => {
-    axios
-      .get(`${API_URL}/api/tasks`)
-      .then((response) => {
-        setToDoList(response.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
-  const getAllToDo = () => {
+  const fetchData = () => {
     axios
       .get(`${API_URL}/api/tasks`)
       .then((response) => {
@@ -47,24 +38,27 @@ function DashboardPage() {
       .catch((error) => console.log(error));
   };
 
-  getAllToDo()
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const requestBody = {
       ...toDo,
-    }
-  
+    };
+
     axios
-    .post(`${API_URL}/api/task`, requestBody)
-    .then((response)=>{
-      const newToDo = response.data;
-  
-      /* navigate(`/tasks/${newToDo._id}`) */
-    })
-    .catch((error)=> console.log(error));
-  }
+      .post(`${API_URL}/api/task`, requestBody)
+      .then((response) => {
+        const newToDo = response.data;
+        fetchData(); // Call the function here to fetch updated data
+        // navigate(`/tasks/${newToDo._id}`);
+      })
+      .catch((error) => console.log(error));
+  };
+
 
 
 
