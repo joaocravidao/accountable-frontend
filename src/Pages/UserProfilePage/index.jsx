@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import defaultProfileImage from '/src/assets/user-profile-image.jpg';
+import defaultProfileImage from '/src/assets/user-profile-image.png';
 
 const UserProfilePage = () => {
   const [user, setUser] = useState({

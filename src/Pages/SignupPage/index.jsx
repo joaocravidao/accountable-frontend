@@ -30,8 +30,9 @@ function SignUpPage(){
     }
 
 return(
-    <div className='signup-container'>
+    <div>
         <h1>Sign-up Page</h1>
+       <div className='signup-container'>
         <form onSubmit = {handleSignUpSubmit}>
             <div> 
                 <label>Email: </label>
@@ -53,8 +54,9 @@ return(
             </div>
             {error && <p>{error}</p>}
         </form>
-    </div>)
-
+    </div> 
+    </div>
+    )
 }
 
 export default SignUpPage;
