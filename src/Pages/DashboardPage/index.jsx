@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-/* import ToDo from '../../components/ToDo';
-import { getAllToDo } from '../../utils/HandleApi'; */
+import ToDoCard from "../../components/ToDoCard"
+import { getAllToDo } from '../../utils/HandleApi';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -16,17 +16,38 @@ const taskValues = {
 function DashboardPage() {
 
 	const [toDo, setToDo] = useState({...taskValues})
+  const [toDoList, setToDoList] = useState([]);
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const {name, value} = e.target; //still need to determine this! 
+    const {name, value} = e.target;  //still need to determine this! 
 
     setToDo((prevToDo)=>({ //this too! 
       ...prevToDo,
       [name]: value,
     }))
   }
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/api/tasks`)
+      .then((response) => {
+        setToDoList(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const getAllToDo = () => {
+    axios
+      .get(`${API_URL}/api/tasks`)
+      .then((response) => {
+        setToDoList(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  getAllToDo()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +61,7 @@ function DashboardPage() {
     .then((response)=>{
       const newToDo = response.data;
   
-      navigate(`/tasks/${newToDo._id}`)
+      /* navigate(`/tasks/${newToDo._id}`) */
     })
     .catch((error)=> console.log(error));
   }
@@ -64,6 +85,16 @@ function DashboardPage() {
           Create ToDo
         </button>
         </form>
+        {toDoList &&
+        toDoList.map(
+          (toDo, index) => (
+              <ToDoCard
+                key={toDo._id}
+                {...toDo}
+                className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}
+              />
+          )
+        )}
       </div>
     </div>
   );
