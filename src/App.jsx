@@ -7,6 +7,7 @@ import SignUpPage from './Pages/SignupPage';
 import UserProfilePage from './Pages/UserProfilePage';
 import NavBar from './Pages/NavBar';
 
+
 function App() {
   return (
     <>

@@ -4,8 +4,8 @@ import userProfileImage from "/src/assets/user-profile-image.png"; // Adjust the
 export default function NavBar() {
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-title">
-        <p>Accountable.me</p>
+      <Link to="/">
+        <img src="https://accountable2you.com/wp-content/uploads/art/a2u-logo-white-small.png" className="navbar-image"/>
       </Link>
       <div className="navbar-links">
         <Link to="/login" className="navbar-link">

@@ -7,7 +7,7 @@ const UserProfilePage = () => {
     firstName: '',
     lastName: '',
     email: '',
-    profileImage: null,
+    profileImageURL: '',
   });
 
   const initialUser = { ...user }; // Store the initial user info for canceling edits
@@ -24,12 +24,12 @@ const UserProfilePage = () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john.doe@example.com',
-        profileImage: null,
+        profileImageURL: 'https://example.com/default-profile-image.jpg',
       };
 
       setUser(loggedInUser);
     }
-  }, []);
+  }, []); // Empty dependency array, runs only on mount
 
   const handleEditProfile = () => {
     setEditMode(true);
@@ -49,12 +49,21 @@ const UserProfilePage = () => {
     setUser(initialUser); // Reset user data to its original state
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setUser((prevUser) => ({
-      ...prevUser,
-      profileImage: file,
-    }));
+  const handleDeleteProfile = () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
+
+    if (confirmDelete) {
+      // Perform delete logic here (e.g., send a request to the server to delete the user).
+      // For now, let's just clear the localStorage and reset the user state.
+      localStorage.removeItem('user');
+      setUser({
+        firstName: '',
+        lastName: '',
+        email: '',
+        profileImageURL: '',
+      });
+      setEditMode(false);
+    }
   };
 
   const handleChange = (event) => {
@@ -68,23 +77,11 @@ const UserProfilePage = () => {
   return (
     <div className='user-profile-container'>
       <div>
-        {user.profileImage ? (
-          <img
-            src={URL.createObjectURL(user.profileImage)}
-            alt="Profile"
-            style={{ width: '100px', height: '100px', borderRadius: '50%' }}
-          />
-        ) : (
-          <img
-            src={defaultProfileImage}
-            alt="Default Profile"
-            style={{ width: '100px', height: '100px', borderRadius: '50%' }}
-          />
-        )}
-        <br></br>
-        {editMode ? (
-          <input type="file" onChange={handleImageChange} accept="image/*" />
-        ) : null}
+        <img
+          src={user.profileImageURL || defaultProfileImage}
+          alt="Profile"
+          style={{ width: '100px', height: '100px' }}
+        />
       </div>
       <div>
         <h2>User Profile</h2>
@@ -120,6 +117,15 @@ const UserProfilePage = () => {
               />
             </label>
             <br />
+            <label>
+              <strong>Profile Image URL: </strong>
+              <input
+                type="text"
+                name="profileImageURL"
+                value={user.profileImageURL}
+                onChange={handleChange}
+              />
+            </label>
           </div>
         ) : (
           <div>
@@ -132,15 +138,22 @@ const UserProfilePage = () => {
             <p>
               <strong>Email: </strong> {user.email}
             </p>
+            <p>
+              <strong>Profile Image URL: </strong> {user.profileImageURL}
+            </p>
           </div>
         )}
         {editMode ? (
           <div>
             <button onClick={handleSaveProfile}>Save</button>
             <button onClick={handleCancelEdit}>Cancel</button>
+            <button onClick={handleDeleteProfile}>Delete Profile</button>
           </div>
         ) : (
-          <button onClick={handleEditProfile}>Edit Profile</button>
+          <div>
+            <button onClick={handleEditProfile}>Edit Profile</button>
+            <button onClick={handleDeleteProfile}>Delete Profile</button>
+          </div>
         )}
       </div>
     </div>
