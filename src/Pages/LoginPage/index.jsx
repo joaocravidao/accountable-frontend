@@ -32,7 +32,6 @@ function LoginPage(){
                 const errorDescription = error.response.data.message; 
                 setError(errorDescription);
             })
-
     }
     
     return(

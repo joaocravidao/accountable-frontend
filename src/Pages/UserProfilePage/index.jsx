@@ -1,21 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import defaultProfileImage from '/src/assets/user-profile-image.png';
+import axios from 'axios';
+
+const API_URL = 'http://localhost:5005';
+
 
 const UserProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
+/*   const userId = req.params
+ */  console.log(`${API_URL}/auth/users/`)
+     console.log(`${API_URL}/auth/users/`)
+
   const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
+    image: '',
     profileImageURL: '',
   });
+  const fetchData = () => {
+    axios
+      .get(`${API_URL}/auth/users/`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  fetchData()
 
   const initialUser = { ...user }; // Store the initial user info for canceling edits
-
   useEffect(() => {
     // Try to retrieve user information from localStorage
     const storedUser = JSON.parse(localStorage.getItem('user'));
-
     if (storedUser) {
       setUser(storedUser);
     } else {
@@ -26,32 +42,24 @@ const UserProfilePage = () => {
         email: 'john.doe@example.com',
         profileImageURL: 'https://example.com/default-profile-image.jpg',
       };
-
       setUser(loggedInUser);
     }
   }, []); // Empty dependency array, runs only on mount
-
   const handleEditProfile = () => {
     setEditMode(true);
   };
-
   const handleSaveProfile = () => {
     setEditMode(false);
-
     // Save user information to localStorage
     localStorage.setItem('user', JSON.stringify(user));
-
     // Perform save/update logic here (e.g., send updated user data to the server).
   };
-
   const handleCancelEdit = () => {
     setEditMode(false);
     setUser(initialUser); // Reset user data to its original state
   };
-
   const handleDeleteProfile = () => {
     const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
-
     if (confirmDelete) {
       // Perform delete logic here (e.g., send a request to the server to delete the user).
       // For now, let's just clear the localStorage and reset the user state.
@@ -65,7 +73,6 @@ const UserProfilePage = () => {
       setEditMode(false);
     }
   };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUser((prevUser) => ({
@@ -73,7 +80,6 @@ const UserProfilePage = () => {
       [name]: value,
     }));
   };
-
   return (
     <div className='user-profile-container'>
       <div>
@@ -159,5 +165,4 @@ const UserProfilePage = () => {
     </div>
   );
 };
-
 export default UserProfilePage;
