@@ -36,18 +36,15 @@ function LoginPage(){
     }
     
     return(
-        <div className='main-login-container'>
-            <h1>Login Page</h1>
+           <div className='main-login-container'>
            <div className='login-container'>
                 <form onSubmit = {handleLoginSubmit}>
                     <div> 
-                        <label>Email: </label>
-                        <input type="email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                        <input placeholder='Email' type="email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
                     </div>
                     <br />
-                    <div> 
-                        <label>Password: </label>
-                        <input type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                    <div>
+                        <input placeholder='Password' type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
                     </div>
                     <br />
                     <div>
@@ -56,8 +53,7 @@ function LoginPage(){
                     {error && <p>{error}</p>}
                 </form>
             </div> 
-        </div>
-    
+        </div>   
     )
 
 }
