@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
-import ToDo from '../../components/ToDoCard';
 
 const API_URL = 'http://localhost:5005';
 

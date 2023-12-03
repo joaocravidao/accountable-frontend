@@ -31,8 +31,7 @@ function SignUpPage(){
 
 return(
     <div>
-        <h1>Sign-up Page</h1>
-       <div className='signup-container'>
+       <div>
         <form onSubmit = {handleSignUpSubmit}>
             <div> 
                 <label>Email: </label>

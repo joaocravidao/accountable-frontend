@@ -1,11 +1,12 @@
 import './index.css';
+import './components/NavBar.css'
 import { Routes, Route } from 'react-router-dom';
 import LoginPage from './Pages/LoginPage';
 import DashboardPage from './Pages/DashboardPage';
 import HomePage from './Pages/HomePage';
 import SignUpPage from './Pages/SignupPage';
 import UserProfilePage from './Pages/UserProfilePage';
-import NavBar from './Pages/NavBar';
+import NavBar from './components/NavBar';
 
 
 function App() {
