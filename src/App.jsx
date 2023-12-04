@@ -1,18 +1,16 @@
-import './index.css';
-import './components/NavBar.css'
+import '/src/App.css';
 import { Routes, Route } from 'react-router-dom';
-import LoginPage from './Pages/LoginPage';
-import DashboardPage from './Pages/DashboardPage';
-import HomePage from './Pages/HomePage';
-import SignUpPage from './Pages/SignupPage';
-import UserProfilePage from './Pages/UserProfilePage';
-import NavBar from './components/NavBar';
+import LoginPage from '/src/pages/LoginPage';
+import DashboardPage from '/src/pages/DashboardPage';
+import HomePage from '/src/pages/HomePage';
+import SignUpPage from '/src/pages/SignupPage';
+import UserProfilePage from '/src/pages/UserProfilePage';
+
 
 
 function App() {
   return (
     <>
-      <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
