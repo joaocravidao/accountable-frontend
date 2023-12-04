@@ -3,13 +3,11 @@ import defaultProfileImage from '/src/images/user-profile-image.png';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:5005';
-
+let userId = localStorage.getItem("userId")
+console.log(userId)
 
 const UserProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
-/*   const userId = req.params
- */  console.log(`${API_URL}/auth/users/`)
-     console.log(`${API_URL}/auth/users/`)
 
   const [user, setUser] = useState({
     name: '',
@@ -17,6 +15,7 @@ const UserProfilePage = () => {
     image: '',
     profileImageURL: '',
   });
+  
   const fetchData = () => {
     axios
       .get(`${API_URL}/auth/users/`)
@@ -55,11 +54,11 @@ const UserProfilePage = () => {
     // Perform save/update logic here (e.g., send updated user data to the server).
   };
   const handleCancelEdit = () => {
-    setEditMode(false);
-    setUser(initialUser); // Reset user data to its original state
+/*     setEditMode(false);
+    setUser(initialUser); // Reset user data to its original state */
   };
   const handleDeleteProfile = () => {
-    const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
+/*     const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
     if (confirmDelete) {
       // Perform delete logic here (e.g., send a request to the server to delete the user).
       // For now, let's just clear the localStorage and reset the user state.
@@ -71,7 +70,7 @@ const UserProfilePage = () => {
         profileImageURL: '',
       });
       setEditMode(false);
-    }
+    } */
   };
   const handleChange = (event) => {
     const { name, value } = event.target;

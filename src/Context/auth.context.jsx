@@ -9,6 +9,7 @@ function AuthProviderWrapper(props){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const [userId, setUserId] = useState('')
     
     /* Store the token in the local storage */
     const storeToken = (token) =>{
@@ -16,7 +17,7 @@ function AuthProviderWrapper(props){
     }
 
     /* Authenticate the User via JWT */
-    const authenticateUser = () =>{
+    const authenticateUser = async () =>{
         // Get the stored token from the local storage
         const storedToken = localStorage.getItem('authToken');
 
@@ -27,6 +28,8 @@ function AuthProviderWrapper(props){
                 setIsLoggedIn(true);
                 setIsLoading(false);
                 setUser(user);
+                setUserId (user._id);
+                console.log(userId)
             })
             .catch(()=>{
                 setIsLoggedIn(false);
@@ -55,7 +58,7 @@ function AuthProviderWrapper(props){
     }, []);
 
     return(
-        <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logOut}}>
+        <AuthContext.Provider value={{isLoggedIn, isLoading, user, storeToken, authenticateUser, logOut, userId}}>
             {props.children}
         </AuthContext.Provider>
     )   

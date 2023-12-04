@@ -88,7 +88,7 @@ function DashboardPage() {
 
   const toggleEditMode = (taskId) => {
     setToDoList((prevToDoList) =>
-      prevToDoList.map((task) =>
+      prevToDoList.map((task) => //change this .map to filter or find. 
         task._id === taskId ? { ...task, editMode: !task.editMode } : task
       )
     );
