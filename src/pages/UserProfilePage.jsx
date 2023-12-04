@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import defaultProfileImage from '/src/images/user-profile-image.png';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const API_URL = 'http://localhost:5005';
-let userId = localStorage.getItem("userId")
-console.log(userId)
 
 const UserProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
+  let {userId} = useParams()
+  console.log(userId)
+
+
 
   const [user, setUser] = useState({
     name: '',
@@ -18,9 +21,10 @@ const UserProfilePage = () => {
   
   const fetchData = () => {
     axios
-      .get(`${API_URL}/auth/users/`)
+      .get(`${API_URL}/auth/users/${userId}`)
       .then((response) => {
         console.log(response.data);
+        setUser(response.data)
       })
       .catch((error) => console.log(error));
   };
@@ -96,8 +100,8 @@ const UserProfilePage = () => {
               <strong>First Name: </strong>
               <input
                 type="text"
-                name="firstName"
-                value={user.firstName}
+                name="name"
+                value={user.name}
                 onChange={handleChange}
               />
             </label>

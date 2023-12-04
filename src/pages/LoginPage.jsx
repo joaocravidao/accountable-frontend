@@ -42,7 +42,6 @@ function LoginPage(){
     
     return(
            <div className='main-login-container'>
-            <Navbar/>
            <div className='login-container'>
                 <form onSubmit = {handleLoginSubmit}>
                     <div> 
