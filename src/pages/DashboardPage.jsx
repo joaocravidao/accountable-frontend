@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
+import NavBar from '../components/Navbar/NavBar';
 
 const API_URL = 'http://localhost:5005';
 
@@ -98,6 +99,7 @@ function DashboardPage() {
  */
   return (
     <div className='container'>
+      <div><NavBar></NavBar></div>
       <h1>Dashboard Page</h1>
       <div className='top'>
       <form onSubmit={(e) => handleSubmit(e)}>

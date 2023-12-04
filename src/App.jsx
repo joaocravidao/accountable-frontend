@@ -14,7 +14,7 @@ import NavBar from './components/Navbar/NavBar';
 function App() {
   return (
     <>
-      <NavBar></NavBar>
+      <NavBar/>
       <Routes>
         <Route path="/" element={<IsAnon><HomePage /></IsAnon>} />
         <Route path="/dashboard/:userId" element={<IsPrivate><DashboardPage /></IsPrivate>} />
