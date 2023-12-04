@@ -27,7 +27,9 @@ function LoginPage(){
                 storeToken(response.data.authToken);
                 axios.defaults.headers['Authorization'] = `Bearer ${response.data.authToken}`;
                 authenticateUser().then(()=>{
-                    navigate(`/dashboard/${userId}`);
+                    if (userId){
+                        navigate(`/dashboard/${userId}`);
+                    }
                 })
               
             })

@@ -7,14 +7,16 @@ import SignUpPage from '/src/pages/SignupPage';
 import UserProfilePage from '/src/pages/UserProfilePage';
 import IsPrivate from './components/isPrivate';
 import IsAnon from './components/isAnon';
+import NavBar from './components/Navbar/NavBar';
 
 
 
 function App() {
   return (
     <>
+      <NavBar></NavBar>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<IsAnon><HomePage /></IsAnon>} />
         <Route path="/dashboard/:userId" element={<IsPrivate><DashboardPage /></IsPrivate>} />
         <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path="/signup" element={<IsAnon><SignUpPage /></IsAnon>} />
