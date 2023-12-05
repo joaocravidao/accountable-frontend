@@ -20,10 +20,11 @@ function LoginPage(){
     const handleLoginSubmit = (e) =>{
         e.preventDefault();
 
-        const requestBody = {email, password};
+        const requestBody = {email, password, userId};
 
         axios.post(`${API_URL}/auth/login`, requestBody)
     .then((response) => {
+        console.log(requestBody)
         storeToken(response.data.authToken);
         axios.defaults.headers['Authorization'] = `Bearer ${response.data.authToken}`;
         authenticateUser().then(() => {

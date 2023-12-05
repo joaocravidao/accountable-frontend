@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
 
@@ -11,18 +11,23 @@ const taskValues = {
   description: '',
   deadline: Date(),
   attachments: '',
+  userId: ''
 };
 
 function DashboardPage() {
   const [toDo, setToDo] = useState({ ...taskValues });
   const [toDoList, setToDoList] = useState([]);
+  const [userId, setUserId] = useState ("656f3d8dcd6774515abfa015")
+/*   let {userId} =useParams("userId") --> use params to retrieve userId
+ */
+
 
   const navigate = useNavigate();
 
   const handleChangeEdit = (e, taskId) => {
     const { name, value } = e.target;
     setToDoList((prevToDoList) => {
-      const updatedList = prevToDoList.map((task) =>
+      const updatedList = prevToDoList.find((task) =>
         task._id === taskId ? { ...task, [name]: value } : task
       );
       return updatedList;
@@ -41,8 +46,16 @@ function DashboardPage() {
     axios
       .get(`${API_URL}/api/tasks`)
       .then((response) => {
-        const tasks = response.data.map((task) => ({ ...task, isNew: false }));
-        setToDoList(tasks);
+        console.log(response)
+        setToDoList(()=>{
+          const filteredList = response.data.filter((toDo)=>{
+            return toDo._id.includes(userId)
+          });
+          console.log(filteredList)
+          return filteredList;
+        })
+/*         const tasks = response.data.map((task) => ({ ...task, isNew: false }));
+        setToDoList(tasks); */
       })
       .catch((error) => console.log(error));
   };
