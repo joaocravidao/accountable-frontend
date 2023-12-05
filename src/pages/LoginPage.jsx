@@ -1,8 +1,8 @@
 import {useContext, useState} from 'react';
 import { AuthContext } from '/src/Context/auth.context.jsx';
 import axios from 'axios';
-
 import {useNavigate} from 'react-router-dom';
+import { Container, FormWrap, Icon, FormContent, Form, FormH1, FormButton, FormInput, FormLabel, Text } from './LoginPageElements';
 
 const API_URL = "http://localhost:5005";
 
@@ -14,7 +14,7 @@ function LoginPage(){
     const navigate = useNavigate();
 
     // use shared functions provided by AuthContext 
-    const {storeToken, authenticateUser} = useContext(AuthContext);
+    const {storeToken, authenticateUser, userId} = useContext(AuthContext);
 
     const handleLoginSubmit = (e) =>{
         e.preventDefault();
@@ -24,9 +24,13 @@ function LoginPage(){
         axios.post(`${API_URL}/auth/login`, requestBody)
             .then((response)=>{
                 storeToken(response.data.authToken);
-                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.authToken}`;
-                authenticateUser();
-                navigate('/dashboard');
+                axios.defaults.headers['Authorization'] = `Bearer ${response.data.authToken}`;
+                authenticateUser().then(() => {
+                    if (userId){
+                        navigate(`/dashboard/${userId}`);
+                    }
+                })
+                
             })
             .catch((error)=>{
                 const errorDescription = error.response.data.message; 
@@ -35,24 +39,25 @@ function LoginPage(){
     }
     
     return(
-           <div className='main-login-container'>
-           <div className='login-container'>
-                <form onSubmit = {handleLoginSubmit}>
-                    <div> 
-                        <input placeholder='Email' type="email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
-                    </div>
-                    <br />
-                    <div>
-                        <input placeholder='Password' type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
-                    </div>
-                    <br />
-                    <div>
-                        <button type="submit">Login</button>
-                    </div>
-                    {error && <p>{error}</p>}
-                </form>
-            </div> 
-        </div>   
+        <>
+          <Container>
+            <FormWrap>
+               <Icon to='/'>accountable</Icon>
+               <FormContent>
+                <Form onSubmit = {handleLoginSubmit}>
+                    <FormH1>Login to your account</FormH1>
+                    <FormLabel htmlFor='for'>Email</FormLabel>
+                    <FormInput type='email' required value={email} onChange={(e)=> setEmail(e.target.value)} />
+                    <FormLabel htmlFor='for'>Password</FormLabel>
+                    <FormInput type='password' required autoComplete="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                    <FormButton type='submit'>Login</FormButton>
+                    <Text>Forgot password?</Text>
+                </Form>
+                {error && <p>{error}</p>}
+               </FormContent>
+            </FormWrap>
+          </Container> 
+        </>   
     )
 
 }

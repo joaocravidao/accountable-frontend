@@ -15,6 +15,9 @@ function SideBar({ isOpen, toggle }) {
             <SidebarLink to='signup' onClick={toggle}>Sign Up</SidebarLink>
           </SidebarMenu>
           <SideBtnWrap>
+            <SidebarRoute to='/signup'>New Account</SidebarRoute>
+          </SideBtnWrap>
+          <SideBtnWrap>
             <SidebarRoute to='/login'>Login</SidebarRoute>
           </SideBtnWrap>
         </SidebarWrapper>

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import { Container, FormWrap, Icon, FormContent, Form, FormH1, FormButton, FormInput, FormLabel } from './SignupPageElements';
 
 const API_URL = "http://localhost:5005";
 
@@ -20,7 +21,7 @@ function SignUpPage(){
         const requestBody = {email, password, name};
 
         axios.post(`${API_URL}/auth/signup`, requestBody)
-            .then(()=>{
+            .then((response)=>{
                 navigate('/login');
             })
             .catch((error)=>{
@@ -30,31 +31,26 @@ function SignUpPage(){
     }
 
 return(
-    <div>
-       <div>
-        <form onSubmit = {handleSignUpSubmit}>
-            <div> 
-                <label>Email: </label>
-                <input type="email" name="email" placeholder='enter email...' value={email} onChange={(e)=> setEmail(e.target.value)}/>
-            </div>
-            <br />
-            <div> 
-                <label>Password: </label>
-                <input type="password" name="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
-            </div>
-            <br />
-            <div> 
-                <label>Username: </label>
-                <input type="text" name="username" value={name} onChange={(e)=> setName(e.target.value)}/>
-            </div>
-            <br />
-            <div>
-                <button type="submit">Sign Up</button>
-            </div>
-            {error && <p>{error}</p>}
-        </form>
-    </div> 
-    </div>
+        <>
+          <Container>
+            <FormWrap>
+               <Icon to='/'>accountable</Icon>
+               <FormContent>
+                <Form onSubmit = {handleSignUpSubmit}>
+                    <FormH1>Create an account</FormH1>
+                    <FormLabel htmlFor='for'>Email</FormLabel>
+                    <FormInput type='email' required value={email} onChange={(e)=> setEmail(e.target.value)} />
+                    <FormLabel htmlFor='for'>Password</FormLabel>
+                    <FormInput type='password' required autoComplete="email" value={password} onChange={(e)=> setPassword(e.target.value)}/>
+                    <FormLabel htmlFor='for'>Username</FormLabel>
+                    <FormInput type='text' required autoComplete="username" value={name} onChange={(e)=> setName(e.target.value)}/>
+                    <FormButton type='submit'>Sign Up</FormButton>
+                </Form>
+                {error && <p>{error}</p>}
+               </FormContent>
+            </FormWrap>
+          </Container> 
+        </>   
     )
 }
 
