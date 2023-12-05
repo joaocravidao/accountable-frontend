@@ -5,18 +5,22 @@ import DashboardPage from '/src/pages/DashboardPage';
 import HomePage from '/src/pages/HomePage';
 import SignUpPage from '/src/pages/SignupPage';
 import UserProfilePage from '/src/pages/UserProfilePage';
+import IsPrivate from './components/isPrivate';
+import IsAnon from './components/isAnon';
+import NavBar from './components/Navbar/NavBar';
 
 
 
 function App() {
   return (
     <>
+      <NavBar/>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/user-profile" element={<UserProfilePage />} />
+        <Route path="/" element={<IsAnon><HomePage /></IsAnon>} />
+        <Route path="/dashboard/:userId" element={<IsPrivate><DashboardPage /></IsPrivate>} />
+        <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
+        <Route path="/signup" element={<IsAnon><SignUpPage /></IsAnon>} />
+        <Route path="/user-profile/:userId" element={<IsPrivate><UserProfilePage /></IsPrivate>} />
       </Routes>
     </>
   );

@@ -15,6 +15,7 @@ function LoginPage(){
 
     // use shared functions provided by AuthContext 
     const {storeToken, authenticateUser, userId} = useContext(AuthContext);
+    console.log(userId)
 
     const handleLoginSubmit = (e) =>{
         e.preventDefault();
@@ -22,20 +23,19 @@ function LoginPage(){
         const requestBody = {email, password};
 
         axios.post(`${API_URL}/auth/login`, requestBody)
-            .then((response)=>{
-                storeToken(response.data.authToken);
-                axios.defaults.headers['Authorization'] = `Bearer ${response.data.authToken}`;
-                authenticateUser().then(() => {
-                    if (userId){
-                        navigate(`/dashboard/${userId}`);
-                    }
-                })
-                
-            })
-            .catch((error)=>{
-                const errorDescription = error.response.data.message; 
-                setError(errorDescription);
-            })
+    .then((response) => {
+        storeToken(response.data.authToken);
+        axios.defaults.headers['Authorization'] = `Bearer ${response.data.authToken}`;
+        authenticateUser().then(() => {
+            if (userId) {
+                navigate(`/dashboard/${userId}`);
+            }
+        });
+    })
+    .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setError(errorDescription);
+    });
     }
     
     return(

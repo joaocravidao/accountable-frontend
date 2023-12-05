@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import defaultProfileImage from '/src/images/user-profile-image.png';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const API_URL = 'http://localhost:5005';
 
-
 const UserProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
-/*   const userId = req.params
- */  console.log(`${API_URL}/auth/users/`)
-     console.log(`${API_URL}/auth/users/`)
+  let {userId} = useParams()
+  console.log(userId)
+
+
 
   const [user, setUser] = useState({
     name: '',
@@ -17,11 +18,13 @@ const UserProfilePage = () => {
     image: '',
     profileImageURL: '',
   });
+  
   const fetchData = () => {
     axios
-      .get(`${API_URL}/auth/users/`)
+      .get(`${API_URL}/auth/users/${userId}`)
       .then((response) => {
         console.log(response.data);
+        setUser(response.data)
       })
       .catch((error) => console.log(error));
   };
@@ -55,11 +58,11 @@ const UserProfilePage = () => {
     // Perform save/update logic here (e.g., send updated user data to the server).
   };
   const handleCancelEdit = () => {
-    setEditMode(false);
-    setUser(initialUser); // Reset user data to its original state
+/*     setEditMode(false);
+    setUser(initialUser); // Reset user data to its original state */
   };
   const handleDeleteProfile = () => {
-    const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
+/*     const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
     if (confirmDelete) {
       // Perform delete logic here (e.g., send a request to the server to delete the user).
       // For now, let's just clear the localStorage and reset the user state.
@@ -71,7 +74,7 @@ const UserProfilePage = () => {
         profileImageURL: '',
       });
       setEditMode(false);
-    }
+    } */
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -97,8 +100,8 @@ const UserProfilePage = () => {
               <strong>First Name: </strong>
               <input
                 type="text"
-                name="firstName"
-                value={user.firstName}
+                name="name"
+                value={user.name}
                 onChange={handleChange}
               />
             </label>
