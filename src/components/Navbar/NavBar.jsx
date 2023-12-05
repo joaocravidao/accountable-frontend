@@ -1,14 +1,13 @@
-import React from 'react'
-import { FaBars } from 'react-icons/fa'
-import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements'
-import { useContext, useState, useEffect } from 'react'
-import { AuthContext } from '../../Context/auth.context'
-import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { animateScroll as scroll } from 'react-scroll'
+import React, { useState, useEffect, useContext } from 'react';
+import { FaBars } from 'react-icons/fa';
+import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements';
+import { AuthContext } from '../../Context/auth.context';
+import { useNavigate } from 'react-router-dom';
+import { animateScroll as scroll } from 'react-scroll';
 
 function NavBar({ toggle }) {
   const [scrollNav, setScrollNav] = useState(false);
+  const { isLoggedIn, logOut, user, userId } = useContext(AuthContext);
 
   const changeNav = () => {
     if (window.scrollY >= 768) {
@@ -20,6 +19,9 @@ function NavBar({ toggle }) {
 
   useEffect(() => {
     window.addEventListener('scroll', changeNav);
+    return () => {
+      window.removeEventListener('scroll', changeNav);
+    };
   }, []);
 
   const toggleHome = () => {
@@ -27,45 +29,38 @@ function NavBar({ toggle }) {
   };
 
   let navigate = useNavigate();
-  const { logOut, isLoggedIn, user, userId } = useContext(AuthContext);
 
   return (
     <>
-      <Nav scrollNav={scrollNav}>
+      <Nav scrollNav={scrollNav} isLoggedIn={isLoggedIn}>
         <NavbarContainer>
           <NavLogo to='/' onClick={toggleHome}>
             accountable
           </NavLogo>
-          <MobileIcon onClick={toggle}>
-            <FaBars />
-          </MobileIcon>
           <NavMenu>
-
             {isLoggedIn && (
               <>
-                <NavItem>
-                  <NavLinks>
-                    <Link to={`/user-profile/${userId}`}>Profile</Link>
-                  </NavLinks>
-                </NavItem>
-                <NavItem>
-                  <NavLinks>
-                    <Link to={`/dashboard/${userId}`}>Taskboard</Link>
-                  </NavLinks>
-                </NavItem>
+                <MobileIcon onClick={toggle}>
+                  <FaBars />
+                </MobileIcon>
+                <NavBtn>
+                  <NavBtnLink to={`/dashboard/${userId}`}>My Dashboard</NavBtnLink>
+                </NavBtn>
+                <NavBtn>
+                  <NavBtnLink to={`/user-profile/${userId}`}>Hello, <strong>{user && user.name}</strong>.</NavBtnLink>
+                </NavBtn>
                 <NavBtn onClick={logOut}>
                   <NavBtnLink to='/'>Logout</NavBtnLink>
-                  <span>{user && user.name}</span>
                 </NavBtn>
               </>
             )}
             {!isLoggedIn && (
               <>
                 <NavItem>
-              <NavLinks to='about' smooth={true} duration={500} spy={true} exact={true} offset={0}>
-                About
-              </NavLinks>
-            </NavItem>
+                  <NavLinks to='about' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                    About
+                  </NavLinks>
+                </NavItem>
                 <NavItem>
                   <NavLinks to='contact' smooth={true} duration={500} spy={true} exact={true} offset={0}>
                     Contact Us
@@ -81,9 +76,9 @@ function NavBar({ toggle }) {
                     Sign Up
                   </NavLinks>
                 </NavItem>
-              <NavBtn>
-              <NavBtnLink to='/login'>Login</NavBtnLink>
-            </NavBtn>
+                <NavBtn>
+                  <NavBtnLink to='/login'>Login</NavBtnLink>
+                </NavBtn>
               </>
             )}
           </NavMenu>

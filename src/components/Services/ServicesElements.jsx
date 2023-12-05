@@ -40,7 +40,7 @@ export const ServicesCard = styled.div`
     background: #fff;
     display: flex;
     flex-direction: column;
-    justfy-content: flex-start;
+    justify-content: flex-start;
     align-items: center;
     border-radius: 10px;
     max-height: 340px;

@@ -19,7 +19,59 @@
       font-family: 'Encode Sans Expanded', sans-serif;
   }
 
-  .login-container {
-    height: 800px;
-    margin-top: 100px
+  .user-container {
+    color: rgb(0, 0, 0);
+    background-color: #01bf71;
+    display: flex;
+    justify-content: center;
+    border-radius: 40px;
   }
+
+  .user-container:hover {
+    background-color: #fff;
+    cursor: pointer;
+  }
+
+
+/* ------------- DASHBOARD PAGE STYLES -------------- */
+
+.dashboard-title {
+  font-size: 32px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.dashboard-body {
+  width: 100%;
+  color: #000000;
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 30px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.icon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.dashboard-container {
+  max-width: 1200px; /* Set your desired maximum width */
+  margin: 0 auto; /* Center the container */
+  width: 100%;
+}
+
+.created-task {
+  background-color: #ff0000; /* Set your desired red color */
+}

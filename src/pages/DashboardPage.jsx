@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
-import NavBar from '../components/Navbar/NavBar';
 
 const API_URL = 'http://localhost:5005';
 
@@ -42,7 +41,8 @@ function DashboardPage() {
     axios
       .get(`${API_URL}/api/tasks`)
       .then((response) => {
-        setToDoList(response.data);
+        const tasks = response.data.map((task) => ({ ...task, isNew: false }));
+        setToDoList(tasks);
       })
       .catch((error) => console.log(error));
   };
@@ -52,30 +52,28 @@ function DashboardPage() {
   }, []);
 
   const handleSubmitEdit = (e, taskId) => {
-    console.log("task id", taskId);
     e.preventDefault();
-      // If taskId exists, it means we are updating an existing task
-      const updatedTask = toDoList.find((task) => task._id === taskId);
-      
-      axios
-        .put(`${API_URL}/api/tasks/${taskId}`, updatedTask)
-        .then(() => {
-          fetchData();
-          toggleEditMode(taskId);
-        })
-        .catch((error) => console.log(error));
+    const updatedTask = toDoList.find((task) => task._id === taskId);
+
+    axios
+      .put(`${API_URL}/api/tasks/${taskId}`, updatedTask)
+      .then(() => {
+        fetchData();
+        toggleEditMode(taskId);
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { ...toDo };
+    const requestBody = { ...toDo, isNew: true };
 
     axios
       .post(`${API_URL}/api/task`, requestBody)
       .then((response) => {
         const newToDo = response.data;
-        fetchData(); // Call the function here to fetch updated data
-        // navigate(`/tasks/${newToDo._id}`);
+        fetchData();
+        setToDo({ ...taskValues });
       })
       .catch((error) => console.log(error));
   };
@@ -89,109 +87,114 @@ function DashboardPage() {
 
   const toggleEditMode = (taskId) => {
     setToDoList((prevToDoList) =>
-      prevToDoList.map((task) => //change this .map to filter or find. 
+      prevToDoList.map((task) =>
         task._id === taskId ? { ...task, editMode: !task.editMode } : task
       )
     );
   };
 
-/*   console.log(task._id)
- */
   return (
-    <div className='container'>
-      <div><NavBar></NavBar></div>
-      <h1>Dashboard Page</h1>
-      <div className='top'>
-      <form onSubmit={(e) => handleSubmit(e)}>
-          <h3>Create Task</h3>
-          <input 
-          type='text'
-          name='title'
-          value={toDo.title}
-          onChange={handleChange}
-          placeholder='title'
-          />
-          <input
-            type='text'
-            name='description'
-            value={toDo.description}
-            onChange={handleChange}
-            placeholder='description'
-          />
-          <input
-            type='date'
-            name='deadline'
-            value={toDo.deadline}
-            onChange={handleChange}
-            placeholder='deadline'
-          />
-          <input
-            type='text'
-            name='attachments'
-            value={toDo.attachments}
-            onChange={handleChange}
-            placeholder='attachments'
-          />
-          <button type='submit'>Create ToDo</button>
-        </form>
-        {toDoList &&
-          toDoList.map((task, index) => (
-            <div
-              className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}
-              key={task._id}
-            >
-              {task.editMode ? (
-                <form onSubmit={(e) => handleSubmitEdit(e, task._id)}>
-                  <input
-                    type='text'
-                    name='title'
-                    value={task.title}
-                    onChange={(e) => handleChangeEdit(e, task._id)}
-                    placeholder='title'
-                  />
-                  <input
-                    type='text'
-                    name='description'
-                    value={task.description}
-                    onChange={(e) => handleChangeEdit(e, task._id)}
-                    placeholder='description'
-                  />
-                  <input
-                    type='date'
-                    name='deadline'
-                    value={task.deadline}
-                    onChange={(e) => handleChangeEdit(e, task._id)}
-                    placeholder='deadline'
-                  />
-                  <input
-                    type='text'
-                    name='attachments'
-                    value={task.attachments}
-                    onChange={(e) => handleChangeEdit(e, task._id)}
-                    placeholder='attachments'
-                  />
-                  <button type='submit'>Save</button>
-                </form>
-              ) : (
-                <div className='text'>
-                  <h4>{task.title}</h4>
-                  <p>{task.description}</p>
-                  <p>{task.deadline}</p>
-                  {task.attachments}
-                </div>
-              )}
-              <BiEdit
-                className='icon'
-                onClick={() => toggleEditMode(task._id)}
-              />
-              <AiFillDelete
-                className='icon'
-                onClick={() => handleDelete(task._id)}
-              />
-            </div>
-          ))}
+    <>
+      <div className='dashboard-title'>
+        <p>My Dashboard</p>
       </div>
-    </div>
+      <div className='dashboard-container'>
+        <div className='dashboard-body'>
+          <div className='top'>
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <h3>Create Task</h3>
+              <input
+                type='text'
+                name='title'
+                value={toDo.title}
+                onChange={handleChange}
+                placeholder='title'
+              />
+              <input
+                type='text'
+                name='description'
+                value={toDo.description}
+                onChange={handleChange}
+                placeholder='description'
+              />
+              <input
+                type='date'
+                name='deadline'
+                value={toDo.deadline}
+                onChange={handleChange}
+                placeholder='deadline'
+              />
+              <input
+                type='text'
+                name='attachments'
+                value={toDo.attachments}
+                onChange={handleChange}
+                placeholder='attachments'
+              />
+              <button type='submit'>Create ToDo</button>
+            </form>
+            {toDoList &&
+              toDoList.map((task) => (
+                <div
+                  className={`${
+                    task.isNew ? 'created-task' : 'bg-gray-100'
+                  }`}
+                  key={task._id}
+                >
+                  {task.editMode ? (
+                    <form onSubmit={(e) => handleSubmitEdit(e, task._id)}>
+                      <input
+                        type='text'
+                        name='title'
+                        value={task.title}
+                        onChange={(e) => handleChangeEdit(e, task._id)}
+                        placeholder='title'
+                      />
+                      <input
+                        type='text'
+                        name='description'
+                        value={task.description}
+                        onChange={(e) => handleChangeEdit(e, task._id)}
+                        placeholder='description'
+                      />
+                      <input
+                        type='date'
+                        name='deadline'
+                        value={task.deadline}
+                        onChange={(e) => handleChangeEdit(e, task._id)}
+                        placeholder='deadline'
+                      />
+                      <input
+                        type='text'
+                        name='attachments'
+                        value={task.attachments}
+                        onChange={(e) => handleChangeEdit(e, task._id)}
+                        placeholder='attachments'
+                      />
+                      <button type='submit'>Save</button>
+                    </form>
+                  ) : (
+                    <div className='text'>
+                      <h4>{task.title}</h4>
+                      <p>{task.description}</p>
+                      <p>{task.deadline}</p>
+                      {task.attachments}
+                    </div>
+                  )}
+                  <BiEdit
+                    className='icon'
+                    onClick={() => toggleEditMode(task._id)}
+                  />
+                  <AiFillDelete
+                    className='icon'
+                    onClick={() => handleDelete(task._id)}
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
