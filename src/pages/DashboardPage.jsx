@@ -99,7 +99,6 @@ function DashboardPage() {
  */
   return (
     <div className='container'>
-      <div><NavBar></NavBar></div>
       <h1>Dashboard Page</h1>
       <div className='top'>
       <form onSubmit={(e) => handleSubmit(e)}>

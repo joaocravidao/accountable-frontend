@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import defaultProfileImage from '/src/images/user-profile-image.png';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../Context/auth.context';
 
 const API_URL = 'http://localhost:5005';
 
 const UserProfilePage = () => {
   const [editMode, setEditMode] = useState(false);
+  const { logOut } = useContext(AuthContext);
+  let navigate = useNavigate()
   let {userId} = useParams()
   console.log(userId)
+
+
 
 
 
@@ -29,7 +34,6 @@ const UserProfilePage = () => {
       .catch((error) => console.log(error));
   };
 
-  fetchData()
 
   const initialUser = { ...user }; // Store the initial user info for canceling edits
   useEffect(() => {
@@ -37,44 +41,53 @@ const UserProfilePage = () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     if (storedUser) {
       setUser(storedUser);
+      fetchData()
     } else {
       // If no user information is found in localStorage, simulate a user login.
       const loggedInUser = {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john.doe@example.com',
-        profileImageURL: 'https://example.com/default-profile-image.jpg',
+        image: 'https://example.com/default-profile-image.jpg',
       };
       setUser(loggedInUser);
+      fetchData()
+
     }
   }, []); // Empty dependency array, runs only on mount
+
   const handleEditProfile = () => {
     setEditMode(true);
   };
-  const handleSaveProfile = () => {
+
+
+  const handleSaveProfile = (e) => {
+    e.preventDefault();
     setEditMode(false);
-    // Save user information to localStorage
-    localStorage.setItem('user', JSON.stringify(user));
-    // Perform save/update logic here (e.g., send updated user data to the server).
+  
+    axios.put(`${API_URL}/auth/users/${userId}`, user)
+      .then(() => {
+        fetchData();
+      })
+      .catch((error) => console.log(error));
   };
+  
   const handleCancelEdit = () => {
-/*     setEditMode(false);
-    setUser(initialUser); // Reset user data to its original state */
+  setEditMode(false);
+    setUser(initialUser); 
+    fetchData()
   };
   const handleDeleteProfile = () => {
-/*     const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
+  const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
     if (confirmDelete) {
-      // Perform delete logic here (e.g., send a request to the server to delete the user).
-      // For now, let's just clear the localStorage and reset the user state.
-      localStorage.removeItem('user');
-      setUser({
-        firstName: '',
-        lastName: '',
-        email: '',
-        profileImageURL: '',
-      });
+      axios.delete(`${API_URL}/auth/users/${userId}`)
+      .then(()=>{
+        logOut()
+        navigate("/")
+      })
+      .catch((error) => console.log(error))
       setEditMode(false);
-    } */
+    } 
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -87,7 +100,7 @@ const UserProfilePage = () => {
     <div className='user-profile-container'>
       <div>
         <img
-          src={user.profileImageURL || defaultProfileImage}
+          src={user.image || defaultProfileImage}
           alt="Profile"
           style={{ width: '100px', height: '100px' }}
         />
@@ -106,15 +119,6 @@ const UserProfilePage = () => {
               />
             </label>
             <br />
-            <label>
-              <strong>Last Name: </strong>
-              <input
-                type="text"
-                name="lastName"
-                value={user.lastName}
-                onChange={handleChange}
-              />
-            </label>
             <br />
             <label>
               <strong>Email: </strong>
@@ -130,8 +134,8 @@ const UserProfilePage = () => {
               <strong>Profile Image URL: </strong>
               <input
                 type="text"
-                name="profileImageURL"
-                value={user.profileImageURL}
+                name="image"
+                value={user.image}
                 onChange={handleChange}
               />
             </label>
@@ -139,16 +143,16 @@ const UserProfilePage = () => {
         ) : (
           <div>
             <p>
-              <strong>First Name: </strong> {user.firstName}
-            </p>
-            <p>
-              <strong>Last Name: </strong> {user.lastName}
+              <strong>First Name: </strong> {user.name}
             </p>
             <p>
               <strong>Email: </strong> {user.email}
             </p>
             <p>
-              <strong>Profile Image URL: </strong> {user.profileImageURL}
+              <strong>Profile Image URL: </strong> {user.image}
+            </p>
+            <p>
+            <small> Created at {user.createdAt ? user.createdAt.split("T")[0] : ''}</small>
             </p>
           </div>
         )}
