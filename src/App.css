@@ -1,28 +1,10 @@
-@font-face {
-    font-family: 'Encode Sans Expanded';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Encode Sans Expanded Regular'), local('EncodeSansExpanded-Regular'), url(https://fonts.gstatic.com/s/encodesansexpanded/v12/cIf-Ma5eqk01EiLjEzgmS7l0PF80.woff2) format('woff2');
-  }
-  
-  @font-face {
-    font-family: 'Encode Sans Expanded';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Encode Sans Expanded Bold'), local('EncodeSansExpanded-Bold'), url(https://fonts.gstatic.com/s/encodesansexpanded/v12/cIf4Ma5eqk01EiLjEzgmS7l0PF80.woff2) format('woff2');
-  }
-  
   * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Encode Sans Expanded', sans-serif;
+      user-select: none;
   }
-
-  html {
-    user-select: none;
-  }
-
 
 /* ------------- DASHBOARD PAGE STYLES -------------- */
 

@@ -57,22 +57,22 @@ function NavBar({ toggle }) {
             {!isLoggedIn && (
               <>
                 <NavItem>
-                  <NavLinks to='about' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                  <NavLinks to='about' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                     About
                   </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to='contact' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                  <NavLinks to='contact' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                     Contact Us
                   </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to='services' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                  <NavLinks to='services' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                     Services
                   </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to='signup' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                  <NavLinks to='signup' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                     Sign Up
                   </NavLinks>
                 </NavItem>
