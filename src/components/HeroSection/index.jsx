@@ -19,7 +19,7 @@ function HeroSection() {
           <HeroH1>Digital To-do List Made Easy</HeroH1>
             <HeroP>Don't waste more time and sign up today.</HeroP>
             <HeroBtnWrapper>
-              <Button to='signup' onMouseEnter={onHover} onMouseLeave={onHover} primary='true' dark='true' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+              <Button to='signup' onMouseEnter={onHover} onMouseLeave={onHover} primary='true' dark='true' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                 Get Started {hover ? <ArrowForward /> : <ArrowRight />}
               </Button>
             </HeroBtnWrapper>

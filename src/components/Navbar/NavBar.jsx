@@ -35,7 +35,7 @@ function NavBar({ toggle }) {
       <Nav scrollNav={scrollNav} isLoggedIn={isLoggedIn}>
         <NavbarContainer>
           <NavLogo to='/' onClick={toggleHome}>
-            accountable
+            accountable.
           </NavLogo>
           <NavMenu>
             {isLoggedIn && (
@@ -44,10 +44,10 @@ function NavBar({ toggle }) {
                   <FaBars />
                 </MobileIcon>
                 <NavBtn>
-                  <NavBtnLink to={`/dashboard/${userId}`}>My Dashboard</NavBtnLink>
+                  <NavBtnLink to={`/user-profile/${userId}`}>Hello, <strong>{user && user.name}</strong>.</NavBtnLink>
                 </NavBtn>
                 <NavBtn>
-                  <NavBtnLink to={`/user-profile/${userId}`}>Hello, <strong>{user && user.name}</strong>.</NavBtnLink>
+                  <NavBtnLink to={`/dashboard/${userId}`}>My Dashboard</NavBtnLink>
                 </NavBtn>
                 <NavBtn onClick={logOut}>
                   <NavBtnLink to='/'>Logout</NavBtnLink>
@@ -57,22 +57,22 @@ function NavBar({ toggle }) {
             {!isLoggedIn && (
               <>
                 <NavItem>
-                  <NavLinks to='about' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                  <NavLinks to='about' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                     About
                   </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to='contact' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                  <NavLinks to='contact' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                     Contact Us
                   </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to='services' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                  <NavLinks to='services' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                     Services
                   </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to='signup' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                  <NavLinks to='signup' smooth={true} duration={500} spy={true} exact='true' offset={0}>
                     Sign Up
                   </NavLinks>
                 </NavItem>

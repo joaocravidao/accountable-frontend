@@ -1,37 +1,10 @@
-@font-face {
-    font-family: 'Encode Sans Expanded';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Encode Sans Expanded Regular'), local('EncodeSansExpanded-Regular'), url(https://fonts.gstatic.com/s/encodesansexpanded/v12/cIf-Ma5eqk01EiLjEzgmS7l0PF80.woff2) format('woff2');
-  }
-  
-  @font-face {
-    font-family: 'Encode Sans Expanded';
-    font-style: normal;
-    font-weight: 700;
-    src: local('Encode Sans Expanded Bold'), local('EncodeSansExpanded-Bold'), url(https://fonts.gstatic.com/s/encodesansexpanded/v12/cIf4Ma5eqk01EiLjEzgmS7l0PF80.woff2) format('woff2');
-  }
-  
   * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       font-family: 'Encode Sans Expanded', sans-serif;
+      user-select: none;
   }
-
-  .user-container {
-    color: rgb(0, 0, 0);
-    background-color: #01bf71;
-    display: flex;
-    justify-content: center;
-    border-radius: 40px;
-  }
-
-  .user-container:hover {
-    background-color: #fff;
-    cursor: pointer;
-  }
-
 
 /* ------------- DASHBOARD PAGE STYLES -------------- */
 
@@ -97,4 +70,54 @@
   text-transform: uppercase;
   font-weight: 900;
   font-size: 15px;
+}
+
+/* ------------- USER PROFILE PAGE STYLES -------------- */
+
+.user-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.user-details-container {
+  margin-left: 30px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 50px;
+}
+
+.user-profile-title {
+  font-size: 32px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.button {
+  background-color: #01bf71;
+  color: #000;
+  border: none;
+  padding: 15px;
+  margin: 5px;
+  font-size: 15px;
+  border-radius: 320px;
+}
+
+.button:hover {
+  background-color: #000;
+  color: #fff;
+  
 }
