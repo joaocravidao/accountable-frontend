@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaBars } from 'react-icons/fa'
 import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { AuthContext } from '../../Context/auth.context'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
@@ -40,11 +40,7 @@ function NavBar({ toggle }) {
             <FaBars />
           </MobileIcon>
           <NavMenu>
-            <NavItem>
-              <NavLinks to='about' smooth={true} duration={500} spy={true} exact={true} offset={0}>
-                About
-              </NavLinks>
-            </NavItem>
+
             {isLoggedIn && (
               <>
                 <NavItem>
@@ -65,15 +61,11 @@ function NavBar({ toggle }) {
             )}
             {!isLoggedIn && (
               <>
-                <NavBtn>
-                  <NavBtnLink to='/login'>Login</NavBtnLink>
-                </NavBtn>
                 <NavItem>
-                  <NavLinks to='signup'>Sign Up</NavLinks>
-                </NavItem>
-                <NavItem>
-                  <NavLinks to='about'>About</NavLinks>
-                </NavItem>
+              <NavLinks to='about' smooth={true} duration={500} spy={true} exact={true} offset={0}>
+                About
+              </NavLinks>
+            </NavItem>
                 <NavItem>
                   <NavLinks to='contact' smooth={true} duration={500} spy={true} exact={true} offset={0}>
                     Contact Us
@@ -89,12 +81,12 @@ function NavBar({ toggle }) {
                     Sign Up
                   </NavLinks>
                 </NavItem>
+              <NavBtn>
+              <NavBtnLink to='/login'>Login</NavBtnLink>
+            </NavBtn>
               </>
             )}
           </NavMenu>
-          <NavBtn>
-            <NavBtnLink to='/login'>Login</NavBtnLink>
-          </NavBtn>
         </NavbarContainer>
       </Nav>
     </>
