@@ -44,10 +44,10 @@ function NavBar({ toggle }) {
                   <FaBars />
                 </MobileIcon>
                 <NavBtn>
-                  <NavBtnLink to={`/dashboard/${userId}`}>My Dashboard</NavBtnLink>
+                  <NavBtnLink to={`/user-profile/${userId}`}>Hello, <strong>{user && user.name}</strong>.</NavBtnLink>
                 </NavBtn>
                 <NavBtn>
-                  <NavBtnLink to={`/user-profile/${userId}`}>Hello, <strong>{user && user.name}</strong>.</NavBtnLink>
+                  <NavBtnLink to={`/dashboard/${userId}`}>My Dashboard</NavBtnLink>
                 </NavBtn>
                 <NavBtn onClick={logOut}>
                   <NavBtnLink to='/'>Logout</NavBtnLink>
