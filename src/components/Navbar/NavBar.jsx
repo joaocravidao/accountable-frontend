@@ -35,7 +35,7 @@ function NavBar({ toggle }) {
       <Nav scrollNav={scrollNav} isLoggedIn={isLoggedIn}>
         <NavbarContainer>
           <NavLogo to='/' onClick={toggleHome}>
-            accountable
+            accountable.
           </NavLogo>
           <NavMenu>
             {isLoggedIn && (
