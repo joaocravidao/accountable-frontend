@@ -101,8 +101,9 @@ function DashboardPage() {
       <div className='dashboard-container'>
         <div className='dashboard-body'>
           <div className='top'>
+          <p className='board-title'>Create Task</p>
+            <div  className='form-input'>
             <form onSubmit={(e) => handleSubmit(e)}>
-              <h3>Create Task</h3>
               <input
                 type='text'
                 name='title'
@@ -133,14 +134,10 @@ function DashboardPage() {
               />
               <button type='submit'>Create ToDo</button>
             </form>
+            </div>
             {toDoList &&
               toDoList.map((task) => (
-                <div
-                  className={`${
-                    task.isNew ? 'created-task' : 'bg-gray-100'
-                  }`}
-                  key={task._id}
-                >
+                <div className={`${task.isNew ? 'created-task' : 'bg-gray-100'}`} key={task._id}>
                   {task.editMode ? (
                     <form onSubmit={(e) => handleSubmitEdit(e, task._id)}>
                       <input

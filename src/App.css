@@ -48,15 +48,14 @@
 .dashboard-body {
   width: 100%;
   color: #000000;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.5);
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
   border: 1px solid black;
   padding: 30px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  
   transition: all 0.2s ease-in-out;
 }
 
@@ -66,12 +65,36 @@
   height: 30px;
 }
 
+.text {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 5px 5px 5px #0000004d;
+  display: inline-block;
+  background-color: #01bf71;
+  width: 90%;
+}
+
+.form-input {
+  background-color: red;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .dashboard-container {
   max-width: 1200px; /* Set your desired maximum width */
   margin: 0 auto; /* Center the container */
   width: 100%;
 }
 
-.created-task {
-  background-color: #ff0000; /* Set your desired red color */
+.board-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 15px;
 }
