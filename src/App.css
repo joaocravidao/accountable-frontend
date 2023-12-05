@@ -19,17 +19,8 @@
       font-family: 'Encode Sans Expanded', sans-serif;
   }
 
-  .user-container {
-    color: rgb(0, 0, 0);
-    background-color: #01bf71;
-    display: flex;
-    justify-content: center;
-    border-radius: 40px;
-  }
-
-  .user-container:hover {
-    background-color: #fff;
-    cursor: pointer;
+  html {
+    user-select: none;
   }
 
 
@@ -97,4 +88,53 @@
   text-transform: uppercase;
   font-weight: 900;
   font-size: 15px;
+}
+
+/* ------------- USER PROFILE PAGE STYLES -------------- */
+
+.user-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.user-details-container {
+  margin-left: 30px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 50px;
+}
+
+.user-profile-title {
+  font-size: 32px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  font-size: 15px
+}
+
+.button:hover {
+  background-color: #01bf71;
+  color: #fff;
+  
 }

@@ -97,79 +97,92 @@ const UserProfilePage = () => {
     }));
   };
   return (
-    <div className='user-profile-container'>
-      <div>
-        <img
-          src={user.image || defaultProfileImage}
-          alt="Profile"
-          style={{ width: '100px', height: '100px' }}
-        />
+    <>
+      <div className='user-profile-title'>
+        <p>User Profile</p>
       </div>
       <div>
-        <h2>User Profile</h2>
-        {editMode ? (
-          <div>
-            <label>
-              <strong>First Name: </strong>
-              <input
-                type="text"
-                name="name"
-                value={user.name}
-                onChange={handleChange}
-              />
-            </label>
-            <br />
-            <br />
-            <label>
-              <strong>Email: </strong>
-              <input
-                type="text"
-                name="email"
-                value={user.email}
-                onChange={handleChange}
-              />
-            </label>
-            <br />
-            <label>
-              <strong>Profile Image URL: </strong>
-              <input
-                type="text"
-                name="image"
-                value={user.image}
-                onChange={handleChange}
-              />
-            </label>
+        <div className='user-profile-container'>
+          <div className='image-container'>
+            <img
+              src={user.image || defaultProfileImage}
+              alt="Profile"
+              style={{ width: '200px', height: '200px', borderRadius: '100px' }}
+            />
           </div>
-        ) : (
-          <div>
-            <p>
-              <strong>First Name: </strong> {user.name}
-            </p>
-            <p>
-              <strong>Email: </strong> {user.email}
-            </p>
-            <p>
-              <strong>Profile Image URL: </strong> {user.image}
-            </p>
-            <p>
-            <small> Created at {user.createdAt ? user.createdAt.split("T")[0] : ''}</small>
-            </p>
+
+          <div className='user-details-container'>
+            {editMode ? (
+              <div>
+                <label>
+                  <strong>First Name: </strong>
+                  <input
+                    type="text"
+                    name="name"
+                    value={user.name}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <br />
+                <label>
+                  <strong>Email: </strong>
+                  <input
+                    type="text"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange}
+                  />
+                </label>
+                <br />
+                <label>
+                  <strong>Profile Image URL: </strong>
+                  <input
+                    type="text"
+                    name="image"
+                    value={user.image}
+                    onChange={handleChange}
+                  />
+                </label>
+              </div>
+            ) : (
+              <div>
+                <p>
+                  <strong>First Name: </strong> {user.name}
+                </p>
+                <p>
+                  <strong>Email: </strong> {user.email}
+                </p>
+                <p>
+                  <strong>Profile Image URL: </strong> {user.image}
+                </p>
+                <p>
+                  <strong>Created at:</strong>{' '}
+                  {user.createdAt ? user.createdAt.split('T')[0] : ''}
+                </p>
+              </div>
+            )}
           </div>
-        )}
-        {editMode ? (
-          <div>
-            <button onClick={handleSaveProfile}>Save</button>
-            <button onClick={handleCancelEdit}>Cancel</button>
-            <button onClick={handleDeleteProfile}>Delete Profile</button>
-          </div>
-        ) : (
-          <div>
-            <button onClick={handleEditProfile}>Edit Profile</button>
-            <button onClick={handleDeleteProfile}>Delete Profile</button>
-          </div>
-        )}
+        </div>
+
+        {/* Buttons outside the user details container */}
+        <div>
+          {editMode ? (
+            <div className='buttons'>
+              <button className='button' onClick={handleSaveProfile}>Save</button>
+              <button className='button' onClick={handleCancelEdit}>Cancel</button>
+              <button className='button' onClick={handleDeleteProfile}>Delete Profile</button>
+            </div>
+          ) : (
+            <div className='buttons'>
+              <button className='button' onClick={handleEditProfile}>Edit Profile</button>
+              <button className='button' onClick={handleDeleteProfile}>Delete Profile</button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
+
 export default UserProfilePage;
