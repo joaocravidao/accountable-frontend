@@ -104,35 +104,43 @@ function DashboardPage() {
         <div className='dashboard-body'>
           <div className='top'>
           <p className='board-title'>Create Task</p>
-            <div  className='form-input'>
+            <div  className='form-input-container'>
             <form onSubmit={(e) => handleSubmit(e)}>
+              <label htmlFor="title">Title:</label>
               <input
                 type='text'
                 name='title'
                 value={toDo.title}
                 onChange={handleChange}
-                placeholder='title'
+                placeholder='enter title here'
+                className='title-input'
               />
+              <label htmlFor="description">Description:</label>
               <input
                 type='text'
                 name='description'
                 value={toDo.description}
                 onChange={handleChange}
-                placeholder='description'
+                placeholder='add a description'
+                className='description-input'
               />
+              <label htmlFor="deadline">Deadline:</label>
               <input
                 type='date'
                 name='deadline'
                 value={toDo.deadline}
                 onChange={handleChange}
-                placeholder='deadline'
+                placeholder='choose a deadline'
+                className='deadline-input'
               />
+              <label htmlFor="attachments">Attachments:</label>
               <input
-                type='text'
+                type='file'
                 name='attachments'
                 value={toDo.attachments}
                 onChange={handleChange}
                 placeholder='attachments'
+                className='attachments-input'
               />
               <button type='submit'>Create ToDo</button>
             </form>

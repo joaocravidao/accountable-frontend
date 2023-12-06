@@ -97,7 +97,7 @@ const UserProfilePage = () => {
     }));
   };
   return (
-    <>
+    <div className='profile-body'>
       <div className='user-profile-title'>
         <p>User Profile</p>
       </div>
@@ -181,7 +181,7 @@ const UserProfilePage = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

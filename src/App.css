@@ -48,17 +48,55 @@
   width: 90%;
 }
 
-.form-input {
-  background-color: red;
-  padding: 5px;
+.form-input-container {
+  border: 1px solid black;
+  padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 600px;
+  background-color: #c8c8c8;
+}
+
+.title-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.description-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.deadline-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.attachments-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  margin: 5px 0;
+  width: 100%;
 }
 
 .dashboard-container {
-  max-width: 1200px; /* Set your desired maximum width */
-  margin: 0 auto; /* Center the container */
+  max-width: 1200px;
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -119,5 +157,4 @@
 .button:hover {
   background-color: #000;
   color: #fff;
-  
 }
