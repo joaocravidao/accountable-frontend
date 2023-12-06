@@ -17,6 +17,7 @@ function DashboardPage() {
   const [toDo, setToDo] = useState({ ...taskValues });
   const [toDoList, setToDoList] = useState([]);
   let {userId} = useParams()
+  console.log(userId)
 
 
   const navigate = useNavigate();
@@ -43,8 +44,14 @@ function DashboardPage() {
     axios
       .get(`${API_URL}/api/tasks/${userId}`)
       .then((response) => {
-        const tasks = response.data.map((task) => ({ ...task, isNew: false }));
+        console.log(userId)
+        console.log(response)
+        const tasks = response.data.filter((task) => (
+          task.user.includes(userId)
+          /* { ...task, isNew: false } */
+          ));
         setToDoList(tasks);
+        return toDoList;
       })
       .catch((error) => console.log(error));
   };
@@ -58,7 +65,7 @@ function DashboardPage() {
     const updatedTask = toDoList.find((task) => task._id === taskId);
 
     axios
-      .put(`${API_URL}/api/tasks/${taskId}`, updatedTask)
+      .put(`${API_URL}/api/tasks/${userId}/${taskId}`, updatedTask)
       .then(() => {
         fetchData();
         toggleEditMode(taskId);
@@ -66,12 +73,14 @@ function DashboardPage() {
       .catch((error) => console.log(error));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, userId) => {
+    console.log("submit id", userId)
     e.preventDefault();
-    const requestBody = { ...toDo, isNew: true };
+    const requestBody = { ...toDo, isNew: true, user: userId};
+    console.log(requestBody)
 
     axios
-      .post(`${API_URL}/api/task`, requestBody)
+      .post(`${API_URL}/api/task/${userId}`, requestBody)
       .then((response) => {
         const newToDo = response.data;
         fetchData();
@@ -105,7 +114,7 @@ function DashboardPage() {
           <div className='top'>
           <p className='board-title'>Create Task</p>
             <div  className='form-input-container'>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={(e) => handleSubmit(e, userId)}>
               <label htmlFor="title">Title:</label>
               <input
                 type='text'
