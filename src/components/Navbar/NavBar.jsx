@@ -4,7 +4,7 @@ import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, MobileMenu, NavItem
 import { AuthContext } from '../../Context/auth.context';
 import { useNavigate } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
-import UserProfilePopup from '../../components/UserProfilePopup';
+import UserProfilePopup from '../../pages/UserProfilePopup';
 
 function NavBar({ toggle }) {
   const [scrollNav, setScrollNav] = useState(false);
