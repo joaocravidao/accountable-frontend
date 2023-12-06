@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
 
@@ -16,6 +16,8 @@ const taskValues = {
 function DashboardPage() {
   const [toDo, setToDo] = useState({ ...taskValues });
   const [toDoList, setToDoList] = useState([]);
+  let {userId} = useParams()
+
 
   const navigate = useNavigate();
 
@@ -39,7 +41,7 @@ function DashboardPage() {
 
   const fetchData = () => {
     axios
-      .get(`${API_URL}/api/tasks`)
+      .get(`${API_URL}/api/tasks/${userId}`)
       .then((response) => {
         const tasks = response.data.map((task) => ({ ...task, isNew: false }));
         setToDoList(tasks);
@@ -80,7 +82,7 @@ function DashboardPage() {
 
   const handleDelete = (taskId) => {
     axios
-      .delete(`${API_URL}/api/tasks/${taskId}`)
+      .delete(`${API_URL}/api/tasks/${userId}/${taskId}`)
       .then(() => fetchData())
       .catch((error) => console.log(error));
   };
