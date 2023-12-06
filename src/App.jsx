@@ -4,7 +4,7 @@ import LoginPage from '/src/pages/LoginPage';
 import DashboardPage from '/src/pages/DashboardPage';
 import HomePage from '/src/pages/HomePage';
 import SignUpPage from '/src/pages/SignupPage';
-import UserProfilePopup from '/src/pages/UserProfilepopup';
+import UserProfilePopup from '/src/pages/UserProfilePopup';
 import IsPrivate from './components/isPrivate';
 import IsAnon from './components/isAnon';
 import NavBar from './components/Navbar/NavBar';
