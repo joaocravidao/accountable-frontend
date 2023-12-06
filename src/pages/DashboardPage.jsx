@@ -44,8 +44,6 @@ function DashboardPage() {
     axios
       .get(`${API_URL}/api/tasks/${userId}`)
       .then((response) => {
-        console.log(userId)
-        console.log(response)
         const tasks = response.data.filter((task) => (
           task.user.includes(userId)
           /* { ...task, isNew: false } */
@@ -76,13 +74,12 @@ function DashboardPage() {
   const handleSubmit = (e, userId) => {
     console.log("submit id", userId)
     e.preventDefault();
-    const requestBody = { ...toDo, isNew: true, user: userId};
+    const requestBody = { ...toDo, user: userId};
     console.log(requestBody)
 
     axios
       .post(`${API_URL}/api/task/${userId}`, requestBody)
       .then((response) => {
-        const newToDo = response.data;
         fetchData();
         setToDo({ ...taskValues });
       })
