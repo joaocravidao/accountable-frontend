@@ -68,6 +68,14 @@ export const NavMenu = styled.ul`
     }
 `;
 
+export const MobileMenu = styled.div`
+    display: none;
+
+    @media screen and (max-width: 768px) {
+        display: block;  /* Display mobile menu on small screens */
+    }
+`;
+
 export const NavItem = styled.li`
     height: 80px;
 `;
