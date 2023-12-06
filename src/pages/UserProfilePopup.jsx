@@ -6,90 +6,77 @@ import { AuthContext } from '../Context/auth.context';
 
 const API_URL = 'https://accountable-me2.adaptable.app/';
 
-const UserProfilePopup = ({closePopup}) => {
-    const [editMode, setEditMode] = useState(false);
-    const { logOut } = useContext(AuthContext);
-    let navigate = useNavigate()
-    let {userId} = useParams()
+const UserProfilePopup = ({ closePopup }) => {
+  const [editMode, setEditMode] = useState(false);
+  const { logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { userId } = useParams();
 
-    const [user, setUser] = useState({
+  const [user, setUser] = useState({
     name: '',
     email: '',
     image: '',
     profileImageURL: '',
   });
-  
-  const fetchData = () => {
-    axios
-      .get(`${API_URL}/auth/users/${userId}`)
-      .then((response) => {
-        console.log(response.data);
-        setUser(response.data)
-      })
-      .catch((error) => console.log(error));
-  };
 
-  const initialUser = { ...user }; // Store the initial user info for canceling edits
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    // Try to retrieve user information from localStorage
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
-      setUser(storedUser);
-      fetchData()
-    } else {
-      // If no user information is found in localStorage, simulate a user login.
-      const loggedInUser = {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
-        image: 'https://example.com/default-profile-image.jpg',
-      };
-      setUser(loggedInUser);
-      fetchData()
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/auth/users/${userId}`);
+        setUser(response.data);
+        setLoading(false); // Set loading to false once data is fetched
+      } catch (error) {
+        console.log(error);
+        setLoading(false); // Set loading to false even in case of an error
+      }
+    };
 
-    }
-  }, []); // Empty dependency array, runs only on mount
+    fetchUserData();
+  }, [userId]); // Dependency on userId to trigger the effect when userId changes
 
   const handleEditProfile = () => {
     setEditMode(true);
   };
 
-  const handleSaveProfile = (e) => {
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
     setEditMode(false);
-  
-    axios.put(`${API_URL}/auth/users/${userId}`, user)
-      .then(() => {
-        fetchData();
-      })
-      .catch((error) => console.log(error));
+
+    try {
+      await axios.put(`${API_URL}/auth/users/${userId}`, user);
+      await fetchUserData(); // Fetch updated user information
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleCancelEdit = () => {
     setEditMode(false);
-      setUser(initialUser); 
-      fetchData()
-    };
-    const handleDeleteProfile = () => {
-    const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
-      if (confirmDelete) {
-        axios.delete(`${API_URL}/auth/users/${userId}`)
-        .then(()=>{
-          logOut()
-          navigate("/")
-        })
-        .catch((error) => console.log(error))
-        setEditMode(false);
-      } 
-    };
-    const handleChange = (event) => {
-      const { name, value } = event.target;
-      setUser((prevUser) => ({
-        ...prevUser,
-        [name]: value,
-      }));
-    };
+  };
 
+  const handleDeleteProfile = async () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
+    if (confirmDelete) {
+      try {
+        await axios.delete(`${API_URL}/auth/users/${userId}`);
+        logOut();
+        navigate('/');
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+  
   return (
     <div className='user-profile-popup'>
         <button onClick={closePopup}>Close</button>

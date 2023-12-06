@@ -16,9 +16,8 @@ const taskValues = {
 function DashboardPage() {
   const [toDo, setToDo] = useState({ ...taskValues });
   const [toDoList, setToDoList] = useState([]);
-  let {userId} = useParams()
-  console.log(userId)
-
+  let { userId } = useParams();
+  console.log(userId);
 
   const navigate = useNavigate();
 
@@ -44,12 +43,8 @@ function DashboardPage() {
     axios
       .get(`${API_URL}/api/tasks/${userId}`)
       .then((response) => {
-        const tasks = response.data.filter((task) => (
-          task.user.includes(userId)
-          /* { ...task, isNew: false } */
-          ));
+        const tasks = response.data.filter((task) => task.user.includes(userId));
         setToDoList(tasks);
-        return toDoList;
       })
       .catch((error) => console.log(error));
   };
@@ -72,14 +67,12 @@ function DashboardPage() {
   };
 
   const handleSubmit = (e, userId) => {
-    console.log("submit id", userId)
     e.preventDefault();
-    const requestBody = { ...toDo, user: userId};
-    console.log(requestBody)
+    const requestBody = { ...toDo, user: userId };
 
     axios
       .post(`${API_URL}/api/task/${userId}`, requestBody)
-      .then((response) => {
+      .then(() => {
         fetchData();
         setToDo({ ...taskValues });
       })
@@ -109,101 +102,88 @@ function DashboardPage() {
       <div className='dashboard-container'>
         <div className='dashboard-body'>
           <div className='top'>
-          <p className='board-title'>Create Task</p>
-            <div  className='form-input-container'>
-            <form onSubmit={(e) => handleSubmit(e, userId)}>
-              <label htmlFor="title">Title:</label>
-              <input
-                type='text'
-                name='title'
-                value={toDo.title}
-                onChange={handleChange}
-                placeholder='enter title here'
-                className='title-input'
-              />
-              <label htmlFor="description">Description:</label>
-              <input
-                type='text'
-                name='description'
-                value={toDo.description}
-                onChange={handleChange}
-                placeholder='add a description'
-                className='description-input'
-              />
-              <label htmlFor="deadline">Deadline:</label>
-              <input
-                type='date'
-                name='deadline'
-                value={toDo.deadline}
-                onChange={handleChange}
-                placeholder='choose a deadline'
-                className='deadline-input'
-              />
-              <label htmlFor="attachments">Attachments:</label>
-              <input
-                type='file'
-                name='attachments'
-                value={toDo.attachments}
-                onChange={handleChange}
-                placeholder='attachments'
-                className='attachments-input'
-              />
-              <button type='submit'>Create ToDo</button>
-            </form>
+            <p className='board-title'>Create Task</p>
+            <div className='form-input-container'>
+              <form onSubmit={(e) => handleSubmit(e, userId)}>
+                <label htmlFor='title'>Title:</label>
+                <input
+                  type='text'
+                  name='title'
+                  value={toDo.title}
+                  onChange={handleChange}
+                  placeholder='enter title here'
+                  className='title-input'
+                />
+                <label htmlFor='description'>Description:</label>
+                <input
+                  type='text'
+                  name='description'
+                  value={toDo.description}
+                  onChange={handleChange}
+                  placeholder='add a description'
+                  className='description-input'
+                />
+                <label htmlFor='deadline'>Deadline:</label>
+                <input
+                  type='date'
+                  name='deadline'
+                  value={toDo.deadline}
+                  onChange={handleChange}
+                  placeholder='choose a deadline'
+                  className='deadline-input'
+                />
+                <label htmlFor='attachments'>Attachments:</label>
+                <input
+                  type='file'
+                  name='attachments'
+                  value={toDo.attachments}
+                  onChange={handleChange}
+                  placeholder='attachments'
+                  className='attachments-input'
+                />
+                <button type='submit'>Create ToDo</button>
+              </form>
             </div>
-            {toDoList &&
-              toDoList.map((task) => (
-                <div className={`${task.isNew ? 'created-task' : 'bg-gray-100'}`} key={task._id}>
-                  {task.editMode ? (
-                    <form onSubmit={(e) => handleSubmitEdit(e, task._id)}>
-                      <input
-                        type='text'
-                        name='title'
-                        value={task.title}
-                        onChange={(e) => handleChangeEdit(e, task._id)}
-                        placeholder='title'
-                      />
-                      <input
-                        type='text'
-                        name='description'
-                        value={task.description}
-                        onChange={(e) => handleChangeEdit(e, task._id)}
-                        placeholder='description'
-                      />
-                      <input
-                        type='date'
-                        name='deadline'
-                        value={task.deadline}
-                        onChange={(e) => handleChangeEdit(e, task._id)}
-                        placeholder='deadline'
-                      />
-                      <input
-                        type='text'
-                        name='attachments'
-                        value={task.attachments}
-                        onChange={(e) => handleChangeEdit(e, task._id)}
-                        placeholder='attachments'
-                      />
-                      <button type='submit'>Save</button>
-                    </form>
-                  ) : (
-                    <div className='text'>
-                      <h4>{task.title}</h4>
-                      <p>{task.description}</p>
-                      <p>{task.deadline}</p>
-                      {task.attachments}
-                    </div>
-                  )}
-                  <BiEdit
-                    className='icon'
-                    onClick={() => toggleEditMode(task._id)}
-                  />
-                  <AiFillDelete
-                    className='icon'
-                    onClick={() => handleDelete(task._id)}
-                  />
-                </div>
-              ))}
+
+            <table className='task-table'>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Deadline</th>
+                  <th>Attachments</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {toDoList.map((task) => (
+                  <tr key={task._id}>
+                    <td>{task.title}</td>
+                    <td>{task.description}</td>
+                    <td>{task.deadline}</td>
+                    <td>{task.attachments}</td>
+                    <td>
+                      {task.editMode ? (
+                        <form onSubmit={(e) => handleSubmitEdit(e, task._id)}>
+                          <button type='submit'>Save</button>
+                        </form>
+                      ) : (
+                        <>
+                          <BiEdit
+                            className='icon'
+                            onClick={() => toggleEditMode(task._id)}
+                          />
+                          <AiFillDelete
+                            className='icon'
+                            onClick={() => handleDelete(task._id)}
+                          />
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

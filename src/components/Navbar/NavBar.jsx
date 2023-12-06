@@ -51,10 +51,10 @@ function NavBar({ toggle }) {
             {isLoggedIn && (
               <>
                 <NavBtn>
-                <NavBtnLink onClick={openProfilePopup}>My Profile</NavBtnLink>
+                <NavBtnLink onClick={openProfilePopup}>Profile</NavBtnLink>
                 </NavBtn>
                 <NavBtn>
-                  <NavBtnLink to={`/dashboard/${userId}`}>My Dashboard</NavBtnLink>
+                  <NavBtnLink to={`/dashboard/${userId}`}>Dashboard</NavBtnLink>
                 </NavBtn>
                 <NavBtn onClick={logOut}>
                   <NavBtnLink to='/'>Logout</NavBtnLink>
