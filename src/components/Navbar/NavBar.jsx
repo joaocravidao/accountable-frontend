@@ -4,9 +4,11 @@ import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, MobileMenu, NavItem
 import { AuthContext } from '../../Context/auth.context';
 import { useNavigate } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
+import UserProfilePopup from '../../components/UserProfilePopup';
 
 function NavBar({ toggle }) {
   const [scrollNav, setScrollNav] = useState(false);
+  const [isProfilePopupOpen, setProfilePopupOpen] = useState(false);
   const { isLoggedIn, logOut, user, userId } = useContext(AuthContext);
 
   const changeNav = () => {
@@ -30,6 +32,14 @@ function NavBar({ toggle }) {
 
   let navigate = useNavigate();
 
+  const openProfilePopup = () => {
+    setProfilePopupOpen(true);
+  };
+
+  const closeProfilePopup = () => {
+    setProfilePopupOpen(false);
+  };
+
   return (
     <>
       <Nav scrollNav={scrollNav} isLoggedIn={isLoggedIn}>
@@ -41,7 +51,7 @@ function NavBar({ toggle }) {
             {isLoggedIn && (
               <>
                 <NavBtn>
-                  <NavBtnLink to={`/user-profile/${userId}`}>Hello, <strong>{user && user.name}</strong>.</NavBtnLink>
+                <NavBtnLink onClick={openProfilePopup}>My Profile</NavBtnLink>
                 </NavBtn>
                 <NavBtn>
                   <NavBtnLink to={`/dashboard/${userId}`}>My Dashboard</NavBtnLink>
@@ -88,6 +98,9 @@ function NavBar({ toggle }) {
           )}
         </NavbarContainer>
       </Nav>
+      {isProfilePopupOpen && (
+        <UserProfilePopup user={user} closePopup={closeProfilePopup} />
+      )}
     </>
   );
 }
