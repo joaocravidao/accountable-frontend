@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
-import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements';
+import { Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, MobileMenu, NavItem, NavLinks, NavBtn, NavBtnLink } from './NavbarElements';
 import { AuthContext } from '../../Context/auth.context';
 import { useNavigate } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
@@ -40,9 +40,6 @@ function NavBar({ toggle }) {
           <NavMenu>
             {isLoggedIn && (
               <>
-                <MobileIcon onClick={toggle}>
-                  <FaBars />
-                </MobileIcon>
                 <NavBtn>
                   <NavBtnLink to={`/user-profile/${userId}`}>Hello, <strong>{user && user.name}</strong>.</NavBtnLink>
                 </NavBtn>
@@ -82,6 +79,13 @@ function NavBar({ toggle }) {
               </>
             )}
           </NavMenu>
+          {!isLoggedIn && (
+            <MobileMenu>
+              <MobileIcon onClick={toggle}>
+                <FaBars />
+              </MobileIcon>
+            </MobileMenu>
+          )}
         </NavbarContainer>
       </Nav>
     </>
