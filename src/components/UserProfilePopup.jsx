@@ -6,18 +6,13 @@ import { AuthContext } from '../Context/auth.context';
 
 const API_URL = 'http://localhost:5005';
 
-const UserProfilePage = () => {
-  const [editMode, setEditMode] = useState(false);
-  const { logOut } = useContext(AuthContext);
-  let navigate = useNavigate()
-  let {userId} = useParams()
-  console.log(userId)
+const UserProfilePopup = ({closePopup}) => {
+    const [editMode, setEditMode] = useState(false);
+    const { logOut } = useContext(AuthContext);
+    let navigate = useNavigate()
+    let {userId} = useParams()
 
-
-
-
-
-  const [user, setUser] = useState({
+    const [user, setUser] = useState({
     name: '',
     email: '',
     image: '',
@@ -33,7 +28,6 @@ const UserProfilePage = () => {
       })
       .catch((error) => console.log(error));
   };
-
 
   const initialUser = { ...user }; // Store the initial user info for canceling edits
   useEffect(() => {
@@ -60,7 +54,6 @@ const UserProfilePage = () => {
     setEditMode(true);
   };
 
-
   const handleSaveProfile = (e) => {
     e.preventDefault();
     setEditMode(false);
@@ -71,33 +64,35 @@ const UserProfilePage = () => {
       })
       .catch((error) => console.log(error));
   };
-  
+
   const handleCancelEdit = () => {
-  setEditMode(false);
-    setUser(initialUser); 
-    fetchData()
-  };
-  const handleDeleteProfile = () => {
-  const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
-    if (confirmDelete) {
-      axios.delete(`${API_URL}/auth/users/${userId}`)
-      .then(()=>{
-        logOut()
-        navigate("/")
-      })
-      .catch((error) => console.log(error))
-      setEditMode(false);
-    } 
-  };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
+    setEditMode(false);
+      setUser(initialUser); 
+      fetchData()
+    };
+    const handleDeleteProfile = () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
+      if (confirmDelete) {
+        axios.delete(`${API_URL}/auth/users/${userId}`)
+        .then(()=>{
+          logOut()
+          navigate("/")
+        })
+        .catch((error) => console.log(error))
+        setEditMode(false);
+      } 
+    };
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setUser((prevUser) => ({
+        ...prevUser,
+        [name]: value,
+      }));
+    };
+
   return (
-    <div className='profile-body'>
+    <div className='user-profile-popup'>
+        <button onClick={closePopup}>Close</button>
       <div className='user-profile-title'>
         <p>User Profile</p>
       </div>
@@ -185,4 +180,4 @@ const UserProfilePage = () => {
   );
 };
 
-export default UserProfilePage;
+export default UserProfilePopup;
