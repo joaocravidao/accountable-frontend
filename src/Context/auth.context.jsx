@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const API_URL = "https://accountable-me2.adaptable.app/";
+const API_URL = "https://accountable-me2.adaptable.app";
 
 const AuthContext = React.createContext();
 

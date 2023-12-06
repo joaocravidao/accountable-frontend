@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../Context/auth.context';
 
-const API_URL = 'https://accountable-me2.adaptable.app/';
+const API_URL = 'https://accountable-me2.adaptable.app';
 
 const UserProfilePopup = ({ closePopup }) => {
   const [editMode, setEditMode] = useState(false);

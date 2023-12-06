@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { Container, FormWrap, Icon, FormContent, Form, FormH1, FormButton, FormInput, FormLabel, Text } from './LoginPageElements';
 
-const API_URL = "https://accountable-me2.adaptable.app/";
+const API_URL = "https://accountable-me2.adaptable.app";
 
 function LoginPage(){
     const [email, setEmail] = useState("");
