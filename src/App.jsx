@@ -4,10 +4,10 @@ import LoginPage from '/src/pages/LoginPage';
 import DashboardPage from '/src/pages/DashboardPage';
 import HomePage from '/src/pages/HomePage';
 import SignUpPage from '/src/pages/SignupPage';
-import UserProfilePopup from '/src/pages/UserProfilePopup';
 import IsPrivate from './components/isPrivate';
 import IsAnon from './components/isAnon';
 import NavBar from './components/Navbar/NavBar';
+import UserProfilePage from './pages/UserProfilePage';
 
 
 
@@ -20,7 +20,7 @@ function App() {
         <Route path="/dashboard/:userId" element={<IsPrivate><DashboardPage /></IsPrivate>} />
         <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>} />
         <Route path="/signup" element={<IsAnon><SignUpPage /></IsAnon>} />
-        <Route path="/user-profile/:userId" element={<IsPrivate><UserProfilePopup /></IsPrivate>} />
+        <Route path="/user-profile/:userId" element={<IsPrivate><UserProfilePage /></IsPrivate>} />
       </Routes>
     </>
   );
