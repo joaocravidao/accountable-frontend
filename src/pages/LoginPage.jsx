@@ -13,24 +13,24 @@ function LoginPage(){
 
     const navigate = useNavigate();
 
-    // use shared functions provided by AuthContext 
+    // use shared functions provided by AuthContext. Here we get the userId
     const {storeToken, authenticateUser, userId} = useContext(AuthContext);
-    console.log(userId)
 
+    //When Login button is clicked we authorize using AuthContext
     const handleLoginSubmit = (e) =>{
         e.preventDefault();
 
         const requestBody = {email, password, userId};
 
         axios.post(`${API_URL}/auth/login`, requestBody)
-    .then((response) => {
-        console.log(requestBody)
-        storeToken(response.data.authToken);
-        axios.defaults.headers['Authorization'] = `Bearer ${response.data.authToken}`;
-        authenticateUser().then(() => {
-            if (userId) {
-                navigate(`/dashboard/${userId}`);
-            }
+        .then((response) => {
+            storeToken(response.data.authToken);
+            axios.defaults.headers['Authorization'] = `Bearer ${response.data.authToken}`;
+            authenticateUser().then(() => {
+                //here we put the userId into params so each user has an individual page
+                if (userId) {
+                    navigate(`/dashboard/${userId}`);
+                }
         });
     })
     .catch((error) => {
@@ -47,9 +47,9 @@ function LoginPage(){
                <FormContent>
                 <Form onSubmit = {handleLoginSubmit}>
                     <FormH1>Login to your account</FormH1>
-                    <FormLabel htmlFor='for'>Email</FormLabel>
+                    <FormLabel htmlFor='email'>Email</FormLabel>
                     <FormInput type='email' required value={email} onChange={(e)=> setEmail(e.target.value)} />
-                    <FormLabel htmlFor='for'>Password</FormLabel>
+                    <FormLabel htmlFor='password'>Password</FormLabel>
                     <FormInput type='password' required autoComplete="password" value={password} onChange={(e)=> setPassword(e.target.value)}/>
                     <FormButton type='submit'>Login</FormButton>
                     <Text>Forgot password?</Text>

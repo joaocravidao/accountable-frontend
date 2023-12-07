@@ -13,11 +13,9 @@ function SignUpPage(){
 
     const navigate = useNavigate();
 
+    //Create a new user
     const handleSignUpSubmit = (e) => {
-        // Prevent default actions of the form submission e.g.: refreshing the page
         e.preventDefault();
-
-        // Create a request body object
         const requestBody = {email, password, name};
 
         axios.post(`${API_URL}/auth/signup`, requestBody)

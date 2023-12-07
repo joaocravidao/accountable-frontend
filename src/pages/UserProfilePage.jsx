@@ -16,6 +16,8 @@ const UserProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
+
+  //load user data when site opens
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -31,10 +33,13 @@ const UserProfilePage = () => {
     fetchUserData();
   }, [userId]);
 
+
+  //switch to edit mode
   const handleEditProfile = () => {
     setEditMode(true);
   };
 
+  //save Edits
   const handleSaveProfile = async () => {
     try {
       await axios.put(`${API_URL}/auth/users/${userId}`, user);
@@ -44,10 +49,13 @@ const UserProfilePage = () => {
     }
   };
 
+  //switch back from edit mode
   const handleCancelEdit = () => {
     setEditMode(false);
   };
 
+
+  //Delete Profile
   const handleDeleteProfile = async () => {
     const confirmDelete = window.confirm('Are you sure you want to delete your profile?');
     if (confirmDelete) {
@@ -60,6 +68,7 @@ const UserProfilePage = () => {
     }
   };
 
+  //handle edit input
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUser((prevUser) => ({
