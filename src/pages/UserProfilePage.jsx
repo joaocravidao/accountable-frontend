@@ -3,7 +3,7 @@ import defaultProfileImage from '/src/images/user-profile-image.png';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-const API_URL = 'http://localhost:5005';
+const API_URL = 'https://accountable-me2.adaptable.app';
 
 const UserProfilePage = () => {
   const { userId } = useParams();
