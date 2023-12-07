@@ -1,8 +1,7 @@
-// UserProfilePage.js
 import React, { useState, useEffect } from 'react';
 import defaultProfileImage from '/src/images/user-profile-image.png';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const API_URL = 'http://localhost:5005';
 

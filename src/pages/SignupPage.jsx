@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import { Container, FormWrap, Icon, FormContent, Form, FormH1, FormButton, FormInput, FormLabel } from './SignupPageElements';
 
-const API_URL = "http://localhost:5005";
+const API_URL = "https://accountable-me2.adaptable.app";
 
 function SignUpPage(){
     const [email, setEmail] = useState("");
