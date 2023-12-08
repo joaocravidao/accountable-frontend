@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import defaultProfileImage from '/src/images/user-profile-image.png';
-import { AuthContext } from '/src/Context/auth.context.jsx';
+import { AuthContext } from '../Context/auth.context.jsx';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const API_URL = 'https://accountable-me2.adaptable.app';
-const navigate = useNavigate();
 
 
 const UserProfilePage = () => {
@@ -23,6 +22,7 @@ const UserProfilePage = () => {
   // use shared functions provided by AuthContext. Here we get the userId
   const {logOut} = useContext(AuthContext);
 
+  const navigate = useNavigate();
 
   //load user data when site opens
   useEffect(() => {
