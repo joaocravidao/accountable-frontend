@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import defaultProfileImage from '/src/images/user-profile-image.png';
+import { AuthContext } from '/src/Context/auth.context.jsx';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const API_URL = 'https://accountable-me2.adaptable.app';
+const navigate = useNavigate();
+
 
 const UserProfilePage = () => {
   const { userId } = useParams();
@@ -15,6 +19,9 @@ const UserProfilePage = () => {
   });
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
+
+  // use shared functions provided by AuthContext. Here we get the userId
+  const {logOut} = useContext(AuthContext);
 
 
   //load user data when site opens
@@ -61,7 +68,10 @@ const UserProfilePage = () => {
     if (confirmDelete) {
       try {
         await axios.delete(`${API_URL}/auth/users/${userId}`);
-        // Handle logout or redirect to another page after deletion
+        logOut();
+        navigate("/");
+
+        
       } catch (error) {
         console.log(error);
       }
