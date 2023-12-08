@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import defaultProfileImage from '/src/images/user-profile-image.png';
 import { AuthContext } from '/src/Context/auth.context.jsx';
